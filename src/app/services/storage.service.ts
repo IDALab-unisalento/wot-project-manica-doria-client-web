@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
-import {User} from '../../models/user';
-
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +16,7 @@ export class StorageService {
   }
 
   static setUser(user: User) {
+    localStorage.setItem('ID_KEY', String(user.id));
     localStorage.setItem('EMAIL_KEY', user.email);
     localStorage.setItem('NAME_KEY', user.name);
     localStorage.setItem('ROLE_KEY', user.role);
@@ -36,7 +36,11 @@ export class StorageService {
 
   ifLoggedIn() {
     this.email = localStorage.getItem('EMAIL_KEY');
-    return this.email != null;
+    if (this.email != null) {
+      return this.authState.next(true);
+    } else {
+      return this.authState.next(false);
+    }
   }
 
   login(user: User) {
