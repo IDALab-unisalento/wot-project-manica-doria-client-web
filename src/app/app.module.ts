@@ -19,12 +19,19 @@ import {StorageService} from './services/storage.service';
 import {AuthGuardService} from './services/auth-guard.service';
 import {ChatService} from './services/chat.service';
 import {DataSharingService} from './services/data-sharing.service';
+import { MachineComponent } from './components/home/machine/machine.component';
+import { BeaconComponent } from './components/home/beacon/beacon.component';
+import { OperatorComponent } from './components/home/operator/operator.component';
+import {BeaconService} from './services/beacon.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    MachineComponent,
+    BeaconComponent,
+    OperatorComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +52,7 @@ import {DataSharingService} from './services/data-sharing.service';
     AuthGuardService,
     ChatService,
     DataSharingService,
+    BeaconService,
   ],
   bootstrap: [AppComponent]
 })

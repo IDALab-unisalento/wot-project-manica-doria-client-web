@@ -1,5 +1,5 @@
 export interface Beacon {
     id?: number;
-    name: string;
-    mac: string;
+    name?: string;
+    mac?: string;
 }

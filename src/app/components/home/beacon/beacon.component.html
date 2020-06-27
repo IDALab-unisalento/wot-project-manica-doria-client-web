@@ -1,0 +1,46 @@
+<h2>Crea Beacon</h2>
+
+<div class="card" style="width: 46rem;">
+  <form>
+    <div class = "form-group">
+      <label>Nome Beacon</label>
+      <input type="text" class="form-control"
+             #name
+             name="name">
+    </div>
+
+    <div class = "form-group">
+      <label>MAC</label>
+      <input type="text" class="form-control"
+             #mac
+             name="mac">
+    </div>
+    <button *ngIf="!isModify" type = "submit" class="btn btn-primary" (click)="createBeacon(name.value, mac.value)">Crea</button>
+    <button *ngIf="isModify" type = "submit" class="btn btn-primary" (click)="modify(name.value, mac.value)">Modifica</button>
+    <button *ngIf="isModify" type = "submit" class="btn btn-primary" (click)="annulla()">Annulla</button>
+  </form>
+</div>
+
+<br>
+
+<h3>Lista Beacon</h3>
+<div  class="card" style="width: 46rem;">
+<ul class="list-group" *ngFor="let beacon of beaconList, let myindex = index">
+  <li class="list-group-item">
+    <b>Nome: </b>{{beacon.name}} <b>MAC: </b>{{beacon.mac}}
+    <button class="btn bg-transparent" (click) = "modifyBeacon(beacon.id, beacon.name, beacon.mac, index)">
+      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M11.293 1.293a1 1 0 0 1 1.414 0l2 2a1 1 0 0 1 0 1.414l-9 9a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391l9-9zM12 2l2 2-9 9-3 1 1-3 9-9z"></path>
+        <path fill-rule="evenodd" d="M12.146 6.354l-2.5-2.5.708-.708 2.5 2.5-.707.708zM3 10v.5a.5.5 0 0 0 .5.5H4v.5a.5.5 0 0 0 .5.5H5v.5a.5.5 0 0 0 .5.5H6v-1.5a.5.5 0 0 0-.5-.5H5v-.5a.5.5 0 0 0-.5-.5H3z"></path>
+      </svg>
+    </button>
+    <button class="btn bg-transparent" (click) = "deleteBeacon(beacon.id, myindex)">
+      <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
+      </svg>
+    </button>
+  </li>
+</ul>
+</div>
+
+

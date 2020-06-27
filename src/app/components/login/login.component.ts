@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(user).subscribe(
       data => {
         console.log(data);
-        this.router.navigate(['/home']);
+        this.router.navigateByUrl('/home');
       },
       error => {
         console.log('USERNAME O PASSWORD ERRATI');
