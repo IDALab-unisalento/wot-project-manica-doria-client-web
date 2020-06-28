@@ -3,7 +3,7 @@ import {Machine} from './machine';
 
 export interface Zone {
     id?: number;
-    name: string;
-    beacon: Beacon;
-    machine: Machine;
+    name?: string;
+    beacon?: Beacon;
+    machine?: Machine;
 }

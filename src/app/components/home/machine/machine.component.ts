@@ -45,13 +45,11 @@ export class MachineComponent implements OnInit {
   }
 
   getAllZoneByMachine() {
-    const machine = document.getElementById('inputGroupSelect01').value;
-    if (machine !== 'Choose...') {
-      this.zoneService.getAllZoneByMachineId(machine).subscribe(data => {
-        this.zoneList = data;
-        console.log(this.zoneList);
-      });
-    }
+    const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    this.zoneService.getAllZoneByMachineId(machine).subscribe(data => {
+      this.zoneList = data;
+      console.log(this.zoneList);
+    });
   }
 
   showAddMachine() {
@@ -78,11 +76,15 @@ export class MachineComponent implements OnInit {
   }
 
   deleteZone(id: any, myindex: number) {
-    
+    console.log('DEL', id);
+    this.zoneService.deleteZone(id).subscribe(data => {
+      console.log('Eliminato', data);
+      this.zoneList.splice(myindex, 1);
+    });
   }
 
   deleteMachine() {
-    const machine = document.getElementById('inputGroupSelect01').value;
+    const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
     if (machine !== 'Choose...') {
       this.machineService.deleteMachine(machine).subscribe(data => {
         console.log(data);
@@ -92,16 +94,16 @@ export class MachineComponent implements OnInit {
   }
 
   addZone(name: string) {
-    const machine = document.getElementById('inputGroupSelect01').value;
-    const beacon = document.getElementById('inputGroupSelect02').value;
+    const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    const beacon = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
     if (machine !== 'Choose...' && beacon !== 'Choose...') {
       this.zone = {
         name,
         beacon: {
-          id: beacon,
+          id: Number(beacon),
         },
         machine: {
-          id: machine,
+          id: Number(machine),
         },
       };
       console.log(this.zone);

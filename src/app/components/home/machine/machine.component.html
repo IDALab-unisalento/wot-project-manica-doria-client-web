@@ -6,7 +6,7 @@
     <div class="card">
       <div class="input-group">
         <select class="custom-select" id="inputGroupSelect01" (change)="getAllZoneByMachine()">
-          <option selected>Choose...</option>
+          <option value = "0" selected>Choose...</option>
           <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
         </select>
         <div class="input-group-append">
@@ -53,7 +53,7 @@
 
         <h3>Associa Beacon</h3>
         <select class="form-control" id="inputGroupSelect02">
-          <option selected>Choose...</option>
+          <option value = "0" selected>Choose...</option>
           <option *ngFor="let beacon of beaconList" value="{{beacon.id}}">{{beacon.name}} ({{beacon.mac}})</option>
         </select>
 

@@ -23,6 +23,7 @@ import { MachineComponent } from './components/home/machine/machine.component';
 import { BeaconComponent } from './components/home/beacon/beacon.component';
 import { OperatorComponent } from './components/home/operator/operator.component';
 import {BeaconService} from './services/beacon.service';
+import { MaintenanceComponent } from './components/home/maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {BeaconService} from './services/beacon.service';
     HomeComponent,
     MachineComponent,
     BeaconComponent,
-    OperatorComponent
+    OperatorComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,

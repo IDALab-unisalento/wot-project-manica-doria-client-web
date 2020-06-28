@@ -6,6 +6,7 @@ import {AuthGuardService} from './services/auth-guard.service';
 import {BeaconComponent} from './components/home/beacon/beacon.component';
 import {MachineComponent} from './components/home/machine/machine.component';
 import {OperatorComponent} from './components/home/operator/operator.component';
+import {MaintenanceComponent} from './components/home/maintenance/maintenance.component';
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path: 'beacon', component: BeaconComponent},
   {path: 'machine', component: MachineComponent},
   {path: 'operator', component: OperatorComponent},
+  {path: 'maintenance', component: MaintenanceComponent},
 ];
 
 @NgModule({

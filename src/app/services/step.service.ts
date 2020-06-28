@@ -19,6 +19,7 @@ export class StepService {
   private getAllStepUrl = ApiVariables.apiUrlStep + '/getAll';
   private getStepByIdUrl = ApiVariables.apiUrlStep + '/getById/';
   private getStepByMaintenanceIdUrl = ApiVariables.apiUrlStep + '/getByMaintenanceId/';
+  private getStepByZoneIdUrl = ApiVariables.apiUrlStep + '/getByZoneId/';
   private saveStepUrl = ApiVariables.apiUrlStep + '/save';
   private deleteStepUrl = ApiVariables.apiUrlStep + '/delete/';
   private completeStepUrl = ApiVariables.apiUrlStep + '/complete/';
@@ -49,6 +50,12 @@ export class StepService {
 
   getStepByMaintenanceId(id: number): Observable<Step[]> {
     return this.http.get<Step[]>(this.getStepByMaintenanceIdUrl + id).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getStepByZoneId(id: string): Observable<Step[]> {
+    return this.http.get<Step[]>(this.getStepByZoneIdUrl + id).pipe(
       catchError(this.handleError)
     );
   }

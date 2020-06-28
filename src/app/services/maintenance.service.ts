@@ -20,6 +20,7 @@ export class MaintenanceService {
   private getAllMaintenanceByUserUrl = ApiVariables.apiUrlMaintenance + '/getMaintenanceFromUser/';
   private getAllMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/getAll';
   private getMaintenanceByIdUrl = ApiVariables.apiUrlMaintenance + '/getById/';
+  private getAllMaintenanceByMachineUrl = ApiVariables.apiUrlMaintenance + '/getAllByMachine/';
   private saveMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/save';
   private deleteMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/delete/';
   private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getByStatusAndUser/';
@@ -43,6 +44,13 @@ export class MaintenanceService {
 
   getMaintenanceById(id: string): Observable<Maintenance> {
     return this.http.get<Maintenance>(this.getMaintenanceByIdUrl + id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getMaintenanceByMachine(id: string): Observable<Maintenance[]> {
+    return this.http.get<Maintenance[]>(this.getAllMaintenanceByMachineUrl + id)
       .pipe(
         catchError(this.handleError)
       );

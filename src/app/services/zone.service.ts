@@ -50,7 +50,7 @@ export class ZoneService {
     );
   }
 
-  getAllZoneByMachineId(id: number): Observable<Zone[]> {
+  getAllZoneByMachineId(id: string): Observable<Zone[]> {
     return this.http.get<Zone[]>(this.getAllZoneByMachineUrl + id).pipe(
         catchError(this.handleError)
     );

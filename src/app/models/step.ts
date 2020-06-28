@@ -5,11 +5,11 @@ export interface Step {
 
     id?: number;
     name: string;
-    description: string;
+    description?: string;
     description_visible?: boolean;
-    duration: number;
-    estimateDuration: number;
-    status: string;
-    attachmentList: Attachment[];
-    zone: Zone;
+    duration?: number;
+    estimateDuration?: number;
+    status?: string;
+    attachmentList?: Attachment[];
+    zone?: Zone;
 }
