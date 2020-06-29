@@ -24,6 +24,7 @@ import { BeaconComponent } from './components/home/beacon/beacon.component';
 import { OperatorComponent } from './components/home/operator/operator.component';
 import {BeaconService} from './services/beacon.service';
 import { MaintenanceComponent } from './components/home/maintenance/maintenance.component';
+import { ListMaintenanceComponent } from './components/home/list-maintenance/list-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { MaintenanceComponent } from './components/home/maintenance/maintenance.
     MachineComponent,
     BeaconComponent,
     OperatorComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    ListMaintenanceComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {BeaconComponent} from './components/home/beacon/beacon.component';
 import {MachineComponent} from './components/home/machine/machine.component';
 import {OperatorComponent} from './components/home/operator/operator.component';
 import {MaintenanceComponent} from './components/home/maintenance/maintenance.component';
+import {ListMaintenanceComponent} from './components/home/list-maintenance/list-maintenance.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'machine', component: MachineComponent},
   {path: 'operator', component: OperatorComponent},
   {path: 'maintenance', component: MaintenanceComponent},
+  {path: 'list-maintenance', component: ListMaintenanceComponent},
 ];
 
 @NgModule({

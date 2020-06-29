@@ -1,60 +1,66 @@
 <h2>Crea Manutenzione</h2>
 
 <div class="row">
-
-
   <div class="col-6">
-    <h2>Macchinario</h2>
 
-    <div class="card">
+    <h2>Manutenzione</h2>
+
+    <form *ngIf="!isCreate">
+      <div class = "form-group">
+        <label>Nome Manutenzione</label>
+        <input type="text" class="form-control"
+               #name
+               name="name">
+      </div>
+
+      <label>Tipo</label>
+      <select class="custom-select" id="inputGroupSelect04">
+        <option value = "Ordinaria">Ordinaria</option>
+        <option value = "Straoridinaria">Straordinaria</option>
+      </select>
+
+      <div class="form-group">
+        <label for="textAreaDescriptionMaintenance">Descrizione</label>
+        <textarea class="form-control" id="textAreaDescriptionMaintenance" rows="3"></textarea>
+      </div>
+    </form>
+
+    <div class="card" *ngIf="!isCreate">
+      <h2>Aggiungi Macchinario</h2>
       <div class="input-group">
         <select class="custom-select" id="inputGroupSelect01" (change)="getAllZoneByMachine()">
           <option value = "0" selected>Choose...</option>
           <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
         </select>
       </div>
+      <button type = "submit" class="btn btn-primary" (click)="saveMaintenance()">Crea</button>
     </div>
 
-    <h2>Manutenzione</h2>
-    <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect03" (change)="getAllZoneByMachine()">
-        <option value = "0" selected>Choose...</option>
-        <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
-      </select>
-      <div class="input-group-append">
-        <button type = "submit" class="btn btn-outline-secondary" (click)="showAddMaintenance()">Aggiungi</button>
+<div *ngIf="isCreate">
+    <div class="card">
+      <div class="card-body">
+        <ul>
+          <li>Nome: {{maintenance.name}}</li>
+          <li>Tipo: {{maintenance.type}}</li>
+          <li>Descrizione: {{maintenance.description}}</li>
+          <li>Macchinario: {{maintenance.machine.name}}</li>
+        </ul>
+        <button type = "submit" class="btn btn-primary" (click)="deleteMaintenance()">Elimina</button>
       </div>
     </div>
-
-    <form *ngIf="isCreate">
-      <div class = "form-group">
-        <label>Nome Macchinario</label>
-        <input type="text" class="form-control"
-               #name
-               name="name">
-      </div>
-
-      <div class = "form-group">
-        <label>Serial Number</label>
-        <input type="text" class="form-control"
-               #serialNumber
-               name="serialNumber">
-      </div>
-      <button type = "submit" class="btn btn-primary" (click)="addMaintenance(name.value, serialNumber.value)">Crea</button>
-      <button type = "submit" class="btn btn-primary" (click)="hideAddMaintenance()">Annulla</button>
-    </form>
 
     <h2>Aggiungi Zona</h2>
 
     <div class="card">
       <div class="input-group">
-        <select class="custom-select" id="inputGroupSelect02" (change)="getAllStepByZone()">
+        <select class="custom-select" id="inputGroupSelect02">
           <option value = "0" selected>Choose...</option>
           <option *ngFor="let zone of zoneList" value = "{{zone.id}}">{{zone.name}} ({{zone.beacon.name}})</option>
         </select>
       </div>
     </div>
 
+    <h2>Aggiungi Step</h2>
     <div class = "form-group">
       <label>Nome Step</label>
       <input type="text" class="form-control"
@@ -63,25 +69,21 @@
     </div>
 
     <div class="form-group">
-      <label for="exampleFormControlTextarea1">Descrizione</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <label for="textAreaDescriptionStep">Descrizione</label>
+      <textarea class="form-control" id="textAreaDescriptionStep" rows="3"></textarea>
     </div>
-      <button type = "submit" class="btn btn-outline-secondary" (click)="addStep()">Aggingi Step</button>
+      <button type = "submit" class="btn btn-outline-secondary" (click)="getZoneById()">Aggingi Step</button>
+  </div>
   </div>
 
 
-
-
-
-
-
-
   <div class="col-6">
+    <div *ngIf="isCreate">
     <h2>Step Manutenzione</h2>
     <div class="card" *ngIf="stepList.length != 0">
       <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
         <li class="list-group-item">
-          {{step.name}} (Beacon associato: {{step.zone.name}})
+          {{step.name}} (Zona: {{step.zone.name}})
           <button class="btn bg-transparent" (click) = "deleteStep(myindex)">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
@@ -89,13 +91,13 @@
           </button>
         </li>
       </ul>
-      <button type = "submit" class="btn btn-outline-secondary" (click)="saveStep()">Save Step</button>
+      <button type = "submit" class="btn btn-outline-secondary" (click)="saveStep()">Salva e Completa</button>
     </div>
 
     <div class="card" *ngIf="stepList.length == 0">
       <p>Non ci sono zone</p>
     </div>
   </div>
-
+  </div>
 
 </div>

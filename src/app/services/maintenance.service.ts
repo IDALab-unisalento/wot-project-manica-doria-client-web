@@ -24,6 +24,7 @@ export class MaintenanceService {
   private saveMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/save';
   private deleteMaintenanceUrl = ApiVariables.apiUrlMaintenance + '/delete/';
   private getMaintenanceByStatusAndUserUrl = ApiVariables.apiUrlMaintenance + '/getByStatusAndUser/';
+  private getAllByStatusUrl = ApiVariables.apiUrlMaintenance + '/getAllByStatus/';
 
   constructor(private http: HttpClient) { }
 
@@ -63,7 +64,7 @@ export class MaintenanceService {
       );
   }
 
-  deleteMaintenance(id: string): Observable<Maintenance> {
+  deleteMaintenance(id: number): Observable<Maintenance> {
     return this.http.delete<Maintenance>(this.deleteMaintenanceUrl + id)
       .pipe(
         catchError(this.handleError)
@@ -72,6 +73,13 @@ export class MaintenanceService {
 
   getMaintenanceByStatusAndUser(status: string, id: string): Observable<Maintenance[]> {
     return this.http.get<Maintenance[]>(this.getMaintenanceByStatusAndUserUrl + status + '/' + id)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  getAllByStatus(status: string): Observable<Maintenance[]> {
+    return this.http.get<Maintenance[]>(this.getAllByStatusUrl + status)
       .pipe(
         catchError(this.handleError)
       );
