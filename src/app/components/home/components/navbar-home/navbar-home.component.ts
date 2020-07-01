@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { StorageService } from './../../../../services/storage.service';
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
@@ -10,7 +12,7 @@ export class NavbarHomeComponent implements OnInit {
   _opened: boolean;
   @Output() showMenu: EventEmitter<boolean>;
 
-  constructor() {
+  constructor(private storage: StorageService, private router: Router) {
     this.showMenu = new EventEmitter<boolean>();
   }
 
@@ -22,4 +24,8 @@ export class NavbarHomeComponent implements OnInit {
     this._opened = !this._opened;
   }
 
+  logout() {
+    this.storage.logout();
+    this.router.navigate(['login']);
+  }
 }

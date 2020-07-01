@@ -28,6 +28,8 @@ import { OperatorComponent } from './components/home/children/operator/operator.
 import { MaintenanceComponent } from './components/home/children/maintenance/maintenance.component';
 import { ListMaintenanceComponent } from './components/home/children/list-maintenance/list-maintenance.component';
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
+import { SideMenuOpenComponent } from './components/home/components/side-menu-open/side-menu-open.component';
+import { SideMenuCloseComponent } from './components/home/components/side-menu-close/side-menu-close.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { DashboardComponent } from './components/home/children/dashboard/dashboa
     MaintenanceComponent,
     ListMaintenanceComponent,
     NavbarHomeComponent,
-    DashboardComponent
+    DashboardComponent,
+    SideMenuOpenComponent,
+    SideMenuCloseComponent
   ],
   imports: [
     BrowserModule,

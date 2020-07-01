@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'list-maintenance', component: ListMaintenanceComponent },
     ],
-    // canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService]
   },
 
 ];

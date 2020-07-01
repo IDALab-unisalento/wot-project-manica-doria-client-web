@@ -1,4 +1,4 @@
-<div class = "card" style="width: 36rem;">
+<!-- <div class = "card" style="width: 36rem;">
   <div class="card-body">
     <h5 class="card-title">Login</h5>
   <form #loginForm="ngForm" (ngSubmit)='login(loginForm.value)'>
@@ -31,5 +31,60 @@
       Submit </button>
 
   </form>
+  </div>
+</div> -->
+
+<div class="hero">
+  <div class="card card-login centered">
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+
+          <h1>
+            <img class="logo-login" src="/assets/icon/logob.png">
+          </h1>
+        </div>
+        <div class="col border-left">
+
+          <form class="padding-lg-top-bottom" #loginForm="ngForm" (ngSubmit)='login(loginForm.value)'>
+            <h5 class="text-center"><b>Login Responsabile</b></h5>
+            <div class="alert alert-danger" role="alert" [hidden]="!loginError">
+              Incorrect Email e/o Password. <br>Please provide a valid password or email.
+            </div>
+            <div class="alert alert-danger" role="alert" [hidden]="!loginDenied">
+              Permissions Denied. <br>Please provide a manager account credential.
+            </div>
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-user-circle"></i></div>
+              <input placeholder="example@domain.com" type="email" class="form-control" #loginEmail='ngModel'
+                [(ngModel)]="userLogin.email" name="email"
+                pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+                required [ngClass]="{'is-invalid' : !(loginEmail.valid || !loginEmail.dirty)}">
+            </div>
+            <div class="invalid-message" [hidden]="loginEmail.valid || !loginEmail.dirty">
+              Please insert a valid email
+            </div>
+
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="fa fa-lock"></i></div>
+              <input placeholder="Password" type="password" class="form-control" [(ngModel)]="userLogin.password"
+                autocomplete name="password" #loginPassword='ngModel'
+                [ngClass]="{'is-invalid' : !(loginPassword.valid || !loginPassword.dirty)}" required minlength=5>
+            </div>
+            <div class="invalid-message" [hidden]="loginPassword.valid || !loginPassword.dirty">
+              Please insert a valid password
+            </div>
+            <div class="invalid-message" [hidden]="!loginPassword.errors?.minlength">
+              add other
+              {{loginPassword.errors?.minlength?.requiredLength - loginPassword.errors?.minlength?.actualLength}}
+              character
+            </div>
+
+            <button type="submit" class="button-login" [disabled]="!loginForm.valid">
+              Login </button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

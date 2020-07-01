@@ -1,5 +1,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
+import { DataSharingService } from 'src/app/services/data-sharing.service';
 
 @Component({
   selector: 'app-home',
@@ -10,9 +13,15 @@ export class HomeComponent implements OnInit {
 
   _opened: boolean = true;
 
-  constructor(private router: Router, private route: ActivatedRoute) { }
+  constructor(
+
+    private userService: UserService,
+    private dataSharing: DataSharingService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
   }
 
   _toggleSidebar() {

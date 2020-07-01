@@ -1,4 +1,4 @@
-<nav class="navbar fixed-top" style=" background-color: var(--dark);">
+<nav class="navbar fixed-top margin-top" style=" background-color: var(--dark);">
     <a class="navbar-brand" routerLink="/home">
         <h4 class="text-light-light">
             <span (click)="_toggleSidebar()">
@@ -12,7 +12,7 @@
         </h4>
     </a>
     <div class="nav justify-content-end text-light-light">
-        <a type="button" class="nav-link ">Logout
+        <a (click)="logout()" type="button" class="nav-link ">Logout
             <i class="fa fa-lg fa-sign-out" aria-hidden="true"></i>
         </a>
     </div>

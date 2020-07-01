@@ -1,3 +1,5 @@
+import { User } from './../../../../models/user';
+import { DataSharingService } from './../../../../services/data-sharing.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./operator.component.css']
 })
 export class OperatorComponent implements OnInit {
+  user: User;
 
-  constructor() { }
+  constructor(private dataSharing: DataSharingService) { }
 
   ngOnInit(): void {
+
   }
 
 }

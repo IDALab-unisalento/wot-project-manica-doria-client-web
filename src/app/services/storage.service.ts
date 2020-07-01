@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Router} from '@angular/router';
-import {User} from '../models/user';
+import { BehaviorSubject } from 'rxjs';
+import { Router } from '@angular/router';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,7 @@ export class StorageService {
     localStorage.setItem('ID_KEY', String(user.id));
     localStorage.setItem('EMAIL_KEY', user.email);
     localStorage.setItem('NAME_KEY', user.name);
+    localStorage.setItem('SURNAME_KEY', user.surname);
     localStorage.setItem('ROLE_KEY', user.role);
   }
 
@@ -31,12 +32,16 @@ export class StorageService {
   }
 
   static getId() {
-    return localStorage.getItem('ROLE_KEY');
+    return localStorage.getItem('ID_KEY');
+  }
+
+  static getValue(key: string) {
+    return localStorage.getItem(key);
   }
 
   ifLoggedIn() {
     this.email = localStorage.getItem('EMAIL_KEY');
-    if (this.email != null) {
+    if (this.email !== null) {
       return this.authState.next(true);
     } else {
       return this.authState.next(false);
@@ -50,9 +55,9 @@ export class StorageService {
   }
 
   logout() {
-    localStorage.clear();
     this.authState.next(false);
-    window.location.reload();
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
   isAuthenticated() {

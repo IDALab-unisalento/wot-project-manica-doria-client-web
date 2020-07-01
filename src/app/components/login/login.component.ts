@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserLogin} from '../../models/user';
-import {LoginService} from '../../services/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { UserLogin } from '../../models/user';
+import { LoginService } from '../../services/login.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +11,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   userLogin: UserLogin;
+  loginError: boolean = false;
+  loginDenied: boolean = false;
 
   constructor(
     private loginService: LoginService,
@@ -30,11 +32,15 @@ export class LoginComponent implements OnInit {
     console.log(user);
     this.loginService.login(user).subscribe(
       data => {
-        console.log(data);
-        this.router.navigateByUrl('/home');
+        if (data.role === 'manager') {
+          console.log('USER :>> ', data);
+          this.router.navigateByUrl('/home');
+        }
+        this.loginDenied = true;
       },
       error => {
-        console.log('USERNAME O PASSWORD ERRATI');
+        this.loginError = true;
+        console.log('err: ', error.message);
       }
     );
   }
