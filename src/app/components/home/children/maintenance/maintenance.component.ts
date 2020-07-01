@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Machine} from '../../../models/machine';
-import {Zone} from '../../../models/zone';
-import {Step} from '../../../models/step';
-import {MachineService} from '../../../services/machine.service';
-import {ZoneService} from '../../../services/zone.service';
-import {StepService} from '../../../services/step.service';
-import {MaintenanceService} from '../../../services/maintenance.service';
-import {Maintenance} from '../../../models/maintenance';
-import {Router} from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Machine } from '../../../../models/machine';
+import { Zone } from '../../../../models/zone';
+import { Step } from '../../../../models/step';
+import { MachineService } from '../../../../services/machine.service';
+import { ZoneService } from '../../../../services/zone.service';
+import { StepService } from '../../../../services/step.service';
+import { MaintenanceService } from '../../../../services/maintenance.service';
+import { Maintenance } from '../../../../models/maintenance';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-maintenance',
@@ -25,12 +25,13 @@ export class MaintenanceComponent implements OnInit {
   isCreate = false;
 
   @ViewChild('name') name: any;
-  
-  constructor(private machineService: MachineService,
-              private stepService: StepService,
-              private zoneService: ZoneService,
-              private maintenanceService: MaintenanceService,
-              private router: Router) { }
+
+  constructor(
+    private machineService: MachineService,
+    private stepService: StepService,
+    private zoneService: ZoneService,
+    private maintenanceService: MaintenanceService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getAllMachine();

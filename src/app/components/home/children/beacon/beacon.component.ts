@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {BeaconService} from '../../../services/beacon.service';
-import {Beacon} from '../../../models/beacon';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { BeaconService } from '../../../../services/beacon.service';
+import { Beacon } from '../../../../models/beacon';
 
 @Component({
   selector: 'app-beacon',
@@ -22,6 +22,7 @@ export class BeaconComponent implements OnInit {
   constructor(private beaconService: BeaconService) { }
 
   ngOnInit() {
+    console.log('init');
     this.getAllBeacon();
   }
 
@@ -40,6 +41,7 @@ export class BeaconComponent implements OnInit {
   getAllBeacon() {
     this.beaconService.getAllBeacon().subscribe(data => {
       this.beaconList = data;
+      console.log(this.beaconList)
     });
   }
 

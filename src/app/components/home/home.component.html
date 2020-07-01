@@ -1,11 +1,121 @@
-<h2>Dashboard</h2>
+<app-navbar-home (showMenu)="_toggleSidebar()"></app-navbar-home>
 
-<button type="button" class="btn btn-outline-primary" routerLink="/beacon">Beacon</button>
+<ng-sidebar-container>
+    <ng-sidebar dockedSize="90px" dock="true" mode="push" [opened]="_opened">
+        <span *ngIf="_opened then open else close"></span>
+    </ng-sidebar>
 
-<button type="button" class="btn btn-outline-primary" routerLink="/machine">Machine</button>
+    <div ng-sidebar-content class="container">
+        <router-outlet></router-outlet>
+    </div>
 
-<button type="button" class="btn btn-outline-primary" routerLink="/operator">Operator</button>
+</ng-sidebar-container>
 
-<button type="button" class="btn btn-outline-primary" routerLink="/maintenance">Maintenance</button>
 
-<button type="button" class="btn btn-outline-primary" routerLink="/list-maintenance">Lista Maintenance</button>
+
+<!----------------------------------------------------
+            Blocchi condizionali *ngIf
+------------------------------------------------------>
+
+<ng-template #open>
+    <nav class="side-navbar">
+        <div style="padding: 10px 0 0 10px;" class="sidebar-header d-flex align-items-center">
+            <i class="align-middle fa fa-5x fa-user-circle-o"></i>
+            <div class="title">
+                <h4> Mario Rossi </h4>
+                <p> Manutenzione Idraulica </p>
+            </div>
+        </div>
+
+        <hr>
+
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a type="button" [routerLink]="['dashboard']" routerLinkActive="is-active">
+                    <i class="fa fa-dashboard fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['beacon']" routerLinkActive="is-active">
+                    <i class="fa fa-bluetooth fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    Beacon
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['machine']" routerLinkActive="is-active">
+                    <i class="fa fa-cogs fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    Machine
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['operator']" routerLinkActive="is-active">
+                    <i class="fa fa-male fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    Operator
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['maintenance']" routerLinkActive="is-active">
+                    <i class="fa fa-wrench fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    Maintenance
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['list-maintenance']" routerLinkActive="is-active">
+                    <i class="fa fa-list-alt fa-fw fa-lg fa-stack" aria-hidden="true"></i>
+                    List Maintenance
+                </a>
+            </li>
+        </ul>
+    </nav>
+</ng-template>
+
+<ng-template #close>
+    <nav class="side-navbar">
+
+        <ul style="margin-left: 210px;" class="navbar-nav text-light-light">
+            <li class="nav-item">
+                <a type="button" [routerLink]="['profile']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-user-circle-o fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['dashboard']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-dashboard fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['beacon']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-bluetooth fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['machine']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-cogs fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['operator']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-male fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['maintenance']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-wrench fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a type="button" [routerLink]="['list-maintenance']" routerLinkActive="is-active">
+                    <i style="margin-left: 10px; font-size: 30px;" class="fa fa-list-alt fa-fw fa-stack"
+                        aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</ng-template>

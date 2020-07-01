@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Zone} from '../../../models/zone';
-import {Machine} from '../../../models/machine';
-import {MachineService} from '../../../services/machine.service';
-import {BeaconService} from '../../../services/beacon.service';
-import {Beacon} from '../../../models/beacon';
-import {ZoneService} from '../../../services/zone.service';
+import { ZoneService } from './../../../../services/zone.service';
+import { BeaconService } from './../../../../services/beacon.service';
+import { MachineService } from './../../../../services/machine.service';
+import { Zone } from './../../../../models/zone';
+import { Beacon } from './../../../../models/beacon';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Machine } from 'src/app/models/machine';
+
 
 @Component({
   selector: 'app-machine',

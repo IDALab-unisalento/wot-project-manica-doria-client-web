@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,12 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  _opened: boolean = true;
+
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
-  goBeacon() {
+  _toggleSidebar() {
+    this._opened = !this._opened;
+  }
 
+  goTo(path: string) {
+    this.router.navigate([path], { relativeTo: this.route });
   }
 }

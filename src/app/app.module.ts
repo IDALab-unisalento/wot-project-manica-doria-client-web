@@ -1,30 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { SidebarModule } from 'ng-sidebar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {LoginComponent} from './components/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {MaintenanceService} from './services/maintenance.service';
-import {AttachmentService} from './services/attachment.service';
-import {UserService} from './services/user.service';
-import {MachineService} from './services/machine.service';
-import {StepService} from './services/step.service';
-import {ZoneService} from './services/zone.service';
-import {UserMaintenanceService} from './services/user-maintenance.service';
-import {LoginService} from './services/login.service';
-import {StorageService} from './services/storage.service';
-import {AuthGuardService} from './services/auth-guard.service';
-import {ChatService} from './services/chat.service';
-import {DataSharingService} from './services/data-sharing.service';
-import { MachineComponent } from './components/home/machine/machine.component';
-import { BeaconComponent } from './components/home/beacon/beacon.component';
-import { OperatorComponent } from './components/home/operator/operator.component';
-import {BeaconService} from './services/beacon.service';
-import { MaintenanceComponent } from './components/home/maintenance/maintenance.component';
-import { ListMaintenanceComponent } from './components/home/list-maintenance/list-maintenance.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { MaintenanceService } from './services/maintenance.service';
+import { AttachmentService } from './services/attachment.service';
+import { UserService } from './services/user.service';
+import { MachineService } from './services/machine.service';
+import { StepService } from './services/step.service';
+import { ZoneService } from './services/zone.service';
+import { UserMaintenanceService } from './services/user-maintenance.service';
+import { LoginService } from './services/login.service';
+import { StorageService } from './services/storage.service';
+import { AuthGuardService } from './services/auth-guard.service';
+import { ChatService } from './services/chat.service';
+import { DataSharingService } from './services/data-sharing.service';
+import { BeaconService } from './services/beacon.service';
+import { NavbarHomeComponent } from './components/home/components/navbar-home/navbar-home.component';
+import { MachineComponent } from './components/home/children/machine/machine.component';
+import { BeaconComponent } from './components/home/children/beacon/beacon.component';
+import { OperatorComponent } from './components/home/children/operator/operator.component';
+import { MaintenanceComponent } from './components/home/children/maintenance/maintenance.component';
+import { ListMaintenanceComponent } from './components/home/children/list-maintenance/list-maintenance.component';
+import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -35,13 +38,17 @@ import { ListMaintenanceComponent } from './components/home/list-maintenance/lis
     BeaconComponent,
     OperatorComponent,
     MaintenanceComponent,
-    ListMaintenanceComponent
+    ListMaintenanceComponent,
+    NavbarHomeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
+    SidebarModule.forRoot(),
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+
   ],
   providers: [
     MaintenanceService,
