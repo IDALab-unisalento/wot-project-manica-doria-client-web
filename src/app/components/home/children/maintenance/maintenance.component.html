@@ -1,11 +1,28 @@
-<h2>Crea Manutenzione</h2>
-
 <div class="row">
   <div class="col-6">
 
     <h2>Manutenzione</h2>
 
-    <form *ngIf="!isCreate">
+    <div *ngIf="!isCreate" class="card">
+      <div class="input-group">
+        <select class="custom-select" id="inputGroupSelectMaintenance" (change)="getAllStepByMaintenance(); getAllZoneByMachine()">
+          <option value = "0" selected>Choose...</option>
+          <option  *ngFor="let maintenance of maintenanceList" value = "{{maintenance.id}}">{{maintenance.name}} ({{maintenance.type}})</option>
+        </select>
+        <div class="input-group-append">
+          <button type = "submit" class="btn btn-outline-secondary" (click)="formMaintenance()">Aggiungi</button>
+        </div>
+        <div class="input-group-append">
+          <button class="btn bg-transparent" (click) = "deleteMaintenance()">
+            <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <form *ngIf="isCreate">
       <div class = "form-group">
         <label>Nome Manutenzione</label>
         <input type="text" class="form-control"
@@ -25,31 +42,24 @@
       </div>
     </form>
 
-    <div class="card" *ngIf="!isCreate">
-      <h2>Aggiungi Macchinario</h2>
+    <h2 *ngIf="isCreate">Aggiungi Macchinario</h2>
+    <div *ngIf="isCreate" class="card">
       <div class="input-group">
-        <select class="custom-select" id="inputGroupSelect01" (change)="getAllZoneByMachine()">
+        <select class="custom-select" id="inputGroupSelect01">
           <option value = "0" selected>Choose...</option>
           <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
         </select>
       </div>
-      <button type = "submit" class="btn btn-primary" (click)="saveMaintenance()">Crea</button>
+
     </div>
 
-<div *ngIf="isCreate">
-    <div class="card">
-      <div class="card-body">
-        <ul>
-          <li>Nome: {{maintenance.name}}</li>
-          <li>Tipo: {{maintenance.type}}</li>
-          <li>Descrizione: {{maintenance.description}}</li>
-          <li>Macchinario: {{maintenance.machine.name}}</li>
-        </ul>
-        <button type = "submit" class="btn btn-primary" (click)="deleteMaintenance()">Elimina</button>
-      </div>
-    </div>
+  <div *ngIf="isCreate">
+    <button type = "submit" class="btn btn-primary" (click)="saveMaintenance()">Crea</button>
+    <button type = "submit" class="btn btn-primary" (click)="annulla()">Annulla</button>
+  </div>
 
-    <h2>Aggiungi Zona</h2>
+<div *ngIf="!isCreate">
+    <h2>Seleziona Zona</h2>
 
     <div class="card">
       <div class="input-group">
@@ -78,13 +88,13 @@
 
 
   <div class="col-6">
-    <div *ngIf="isCreate">
+    <div *ngIf="!isCreate">
     <h2>Step Manutenzione</h2>
     <div class="card" *ngIf="stepList.length != 0">
       <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
         <li class="list-group-item">
           {{step.name}} (Zona: {{step.zone.name}})
-          <button class="btn bg-transparent" (click) = "deleteStep(myindex)">
+          <button class="btn bg-transparent" (click) = "deleteStep(step.id, myindex)">
             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
             </svg>

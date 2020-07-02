@@ -30,6 +30,7 @@ import { ListMaintenanceComponent } from './components/home/children/list-mainte
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
 import { SideMenuOpenComponent } from './components/home/components/side-menu-open/side-menu-open.component';
 import { SideMenuCloseComponent } from './components/home/components/side-menu-close/side-menu-close.component';
+import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SideMenuCloseComponent } from './components/home/components/side-menu-c
     NavbarHomeComponent,
     DashboardComponent,
     SideMenuOpenComponent,
-    SideMenuCloseComponent
+    SideMenuCloseComponent,
+    ListUserMaintenanceComponent,
   ],
   imports: [
     BrowserModule,

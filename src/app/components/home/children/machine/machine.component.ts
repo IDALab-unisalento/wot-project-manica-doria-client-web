@@ -47,7 +47,7 @@ export class MachineComponent implements OnInit {
 
   getAllZoneByMachine() {
     const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
-    this.zoneService.getAllZoneByMachineId(machine).subscribe(data => {
+    this.zoneService.getAllZoneByMachineId(Number(machine)).subscribe(data => {
       this.zoneList = data;
       console.log(this.zoneList);
     });

@@ -42,7 +42,7 @@ export class StepService {
     );
   }
 
-  deleteStep(id: string): Observable<Step> {
+  deleteStep(id: number): Observable<Step> {
     return this.http.delete<Step>(this.deleteStepUrl + id).pipe(
       catchError(this.handleError)
     );

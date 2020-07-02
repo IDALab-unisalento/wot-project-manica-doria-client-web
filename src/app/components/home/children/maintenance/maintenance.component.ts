@@ -18,9 +18,10 @@ export class MaintenanceComponent implements OnInit {
 
   machineList: Machine[];
   zoneList: Zone[];
-  stepList: Step[] = [];
+  stepList: any[] = [];
   zone: Zone;
-  maintenance: Maintenance;
+  maintenanceList: Maintenance[];
+  maintenance: Maintenance ;
   step: Step;
   isCreate = false;
 
@@ -35,6 +36,14 @@ export class MaintenanceComponent implements OnInit {
 
   ngOnInit() {
     this.getAllMachine();
+    this.getAllMaintenanceToSend();
+    this.getAllStepByMaintenance();
+  }
+
+  getAllMaintenanceToSend() {
+    this.maintenanceService.getAllByStatus('to-send').subscribe(data => {
+      this.maintenanceList = data;
+    });
   }
 
   getAllMachine() {
@@ -56,13 +65,15 @@ export class MaintenanceComponent implements OnInit {
     this.maintenanceService.saveMaintenance(this.maintenance).subscribe(data => {
       console.log(data);
       this.maintenance = data;
-      this.isCreate = true;
+      this.isCreate = false;
+      this.getAllMaintenanceToSend();
     });
   }
 
   getAllZoneByMachine() {
-    const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
-    this.zoneService.getAllZoneByMachineId(machine).subscribe(data => {
+    const id_maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
+    const maintenance = this.maintenanceList.find(x => x.id === Number(id_maintenance));
+    this.zoneService.getAllZoneByMachineId(maintenance.machine.id).subscribe(data => {
       this.zoneList = data;
       console.log(this.zoneList);
     });
@@ -78,8 +89,10 @@ export class MaintenanceComponent implements OnInit {
   }
 
   getAllStepByMaintenance() {
-    this.stepService.getStepByMaintenanceId(this.maintenance.id).subscribe(data => {
+    const maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
+    this.stepService.getStepByMaintenanceId(Number(maintenance)).subscribe(data => {
       this.stepList = data;
+      console.log(this.stepList);
     });
   }
 
@@ -89,31 +102,55 @@ export class MaintenanceComponent implements OnInit {
       description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
       zone: this.zone,
       maintenance: {
-        id: this.maintenance.id,
+        id: Number((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value),
       }
     };
     console.log('STEEEEEP', this.step);
     this.stepList.push(this.step);
   }
 
-  deleteStep(myindex: number) {
-    this.stepList.splice(myindex, 1);
+  deleteStep(id: number, myindex: number) {
+    if (id !== undefined) {
+      this.stepService.deleteStep(id).subscribe(data => {
+        console.log(data);
+        this.stepList.splice(myindex, 1);
+      });
+    } else {
+      this.stepList.splice(myindex, 1);
+    }
   }
 
   saveStep() {
+    const maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
+    const main = { id: Number(maintenance) } as Maintenance;
+    this.stepList[0].status = 'started';
     for (let i = 0; i < this.stepList.length; i++) {
+      this.stepList[i].maintenance = main;
+      console.log(this.stepList[i]);
       this.stepList[i].numbered = i + 1;
+      if (i !== 0) {
+        this.stepList[i].status = 'to-do';
+      }
       this.stepService.saveStep(this.stepList[i]).subscribe(data => {
         console.log(data);
-        this.router.navigateByUrl('list-maintenance');
+        this.router.navigateByUrl('/home/list-maintenance');
       });
     }
   }
 
   deleteMaintenance() {
-    this.maintenanceService.deleteMaintenance(this.maintenance.id).subscribe(data => {
-      console.log('Eliminato', data);
-      this.isCreate = false;
+    const maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
+    this.maintenanceService.deleteMaintenance(Number(maintenance)).subscribe(data => {
+      console.log(data);
+      this.getAllMaintenanceToSend();
     });
+  }
+
+  formMaintenance() {
+    this.isCreate = true;
+  }
+
+  annulla() {
+    this.isCreate = false;
   }
 }

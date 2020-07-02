@@ -43,13 +43,13 @@ export class UserService {
     );
   }
 
-  deleteUser(id: string): Observable<User> {
+  deleteUser(id: number): Observable<User> {
     return this.http.delete<User>(this.deleteUserUrl + id).pipe(
       catchError(this.handleError)
     );
   }
 
-  cambiaPassword(user: User): Observable<User>{
+  updateUser(user: User): Observable<User>{
     return this.http.put<User>(this.updateUserUrl, user, httpOptions).pipe(
         catchError(this.handleError)
     );

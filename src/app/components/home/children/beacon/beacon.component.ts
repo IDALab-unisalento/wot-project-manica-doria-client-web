@@ -41,7 +41,7 @@ export class BeaconComponent implements OnInit {
   getAllBeacon() {
     this.beaconService.getAllBeacon().subscribe(data => {
       this.beaconList = data;
-      console.log(this.beaconList)
+      console.log(this.beaconList);
     });
   }
 
