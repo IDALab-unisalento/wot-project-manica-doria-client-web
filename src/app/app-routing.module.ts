@@ -9,6 +9,7 @@ import { OperatorComponent } from './components/home/children/operator/operator.
 import { MachineComponent } from './components/home/children/machine/machine.component';
 import { BeaconComponent } from './components/home/children/beacon/beacon.component';
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
+import {ListUserMaintenanceComponent} from './components/home/children/list-user-maintenance/list-user-maintenance.component';
 
 
 
@@ -26,6 +27,7 @@ const routes: Routes = [
       { path: 'maintenance', component: MaintenanceComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'list-maintenance', component: ListMaintenanceComponent },
+      { path: 'list-user-maintenance', component: ListUserMaintenanceComponent },
     ],
     canActivate: [AuthGuardService]
   },
