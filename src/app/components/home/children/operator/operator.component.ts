@@ -1,12 +1,6 @@
-<<<<<<< Updated upstream
-import { User } from './../../../../models/user';
-import { DataSharingService } from './../../../../services/data-sharing.service';
-import { Component, OnInit } from '@angular/core';
-=======
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../../services/user.service';
->>>>>>> Stashed changes
 
 @Component({
   selector: 'app-operator',
@@ -14,22 +8,15 @@ import {UserService} from '../../../../services/user.service';
   styleUrls: ['./operator.component.css']
 })
 export class OperatorComponent implements OnInit {
-  user: User;
-
-<<<<<<< Updated upstream
-  constructor(private dataSharing: DataSharingService) { }
-
-  ngOnInit(): void {
-
-=======
-  user: User;
-  userList: User[];
 
   @ViewChild('name') name: any;
   @ViewChild('surname') surname: any;
   @ViewChild('email') email: any;
   @ViewChild('password') password: any;
   @ViewChild('serialNumber') serialNumber: any;
+
+  user: User;
+  userList: User[];
 
   isModify = false;
   id_user: number;
@@ -45,7 +32,6 @@ export class OperatorComponent implements OnInit {
       console.log(data);
       this.userList = data;
     });
->>>>>>> Stashed changes
   }
 
   saveUser(name: string, surname: string, email: string, password: string, serialNumber: string) {

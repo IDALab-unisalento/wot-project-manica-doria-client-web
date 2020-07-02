@@ -37,7 +37,7 @@ export class MaintenanceComponent implements OnInit {
   ngOnInit() {
     this.getAllMachine();
     this.getAllMaintenanceToSend();
-    this.getAllStepByMaintenance();
+    //this.getAllStepByMaintenance();
   }
 
   getAllMaintenanceToSend() {
@@ -73,10 +73,12 @@ export class MaintenanceComponent implements OnInit {
   getAllZoneByMachine() {
     const id_maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
     const maintenance = this.maintenanceList.find(x => x.id === Number(id_maintenance));
-    this.zoneService.getAllZoneByMachineId(maintenance.machine.id).subscribe(data => {
-      this.zoneList = data;
-      console.log(this.zoneList);
-    });
+    if (maintenance !== undefined) {
+      this.zoneService.getAllZoneByMachineId(maintenance.machine.id).subscribe(data => {
+        this.zoneList = data;
+        console.log(this.zoneList);
+      });
+    }
   }
 
   getZoneById() {
