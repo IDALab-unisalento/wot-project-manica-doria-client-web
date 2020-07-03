@@ -1,1 +1,16 @@
-<p>list-user-maintenance works!</p>
+<h2>User Maintenance</h2>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click)="getAllUserMaintenanceByStatus('started')">Attive</button>
+  <button type="button" class="btn btn-secondary" (click)="getAllUserMaintenanceByStatus('in-progress')">In Corso</button>
+  <button type="button" class="btn btn-secondary" (click)="getAllUserMaintenanceByStatus('completed')">Completate</button>
+</div>
+
+<h3>Lista Manutenzioni</h3>
+<div  class="card" style="width: 46rem;">
+  <ul class="list-group" *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
+    <li class="list-group-item">
+      <b>Nome: </b>{{userMaintenance.maintenance.name}} <b>Operatore: </b>{{userMaintenance.user.name}}
+    </li>
+  </ul>
+</div>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UserMaintenance} from '../../../../models/user-maintenance';
+import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
 
 @Component({
   selector: 'app-list-user-maintenance',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListUserMaintenanceComponent implements OnInit {
 
-  constructor() { }
+  userMaintenanceList: UserMaintenance[];
+
+  constructor(private userMaintenanceService: UserMaintenanceService) { }
 
   ngOnInit(): void {
+  }
+
+  getAllUserMaintenanceByStatus(status: string) {
+    this.userMaintenanceService.getAllUMByStatus(status).subscribe(data => {
+      console.log(data);
+      this.userMaintenanceList = data;
+    });
   }
 
 }

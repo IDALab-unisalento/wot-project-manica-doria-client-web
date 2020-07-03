@@ -20,11 +20,18 @@ export class UserMaintenanceService {
   private getUMByIdUrl = ApiVariables.apiUrlUserMaintenance + '/getById/';
   private saveUMUrl = ApiVariables.apiUrlUserMaintenance + '/save';
   private deleteUMUrl = ApiVariables.apiUrlUserMaintenance + '/delete/';
+  private getAllUMByStatusUrl = ApiVariables.apiUrlUserMaintenance + '/getAllByStatus/';
 
   constructor(private http: HttpClient) { }
 
   getAllUM(): Observable<UserMaintenance[]> {
     return this.http.get<UserMaintenance[]>(this.getAllUMUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllUMByStatus(status: string): Observable<UserMaintenance[]> {
+    return this.http.get<UserMaintenance[]>(this.getAllUMByStatusUrl + status).pipe(
       catchError(this.handleError)
     );
   }

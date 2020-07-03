@@ -90,13 +90,12 @@
       </div>
       <div class = "form-group">
         <label>Video URL</label>
-        <input type="text" class="form-control"
-               #video
+        <input type="text" class="form-control" [(ngModel)]="video"
                name="video">
       </div>
 
     </form>
-      <button type = "submit" class="btn btn-outline-secondary" (click)="getZoneById()">Aggingi Step</button>
+      <button type = "submit" class="btn btn-outline-secondary" (click)="getZoneById()">Aggiungi Step</button>
   </div>
   </div>
 
@@ -116,7 +115,9 @@
               <div id="carouselExampleControls{{myindex}}" class="carousel slide" data-ride="carousel" style="height: 300px; width: 300px">
                 <div class="carousel-inner">
                   <div class="carousel-item" *ngFor= "let attachment of step.attachmentList, let isFirst = first" [ngClass]="{active:isFirst}">
-                    <img [src]= "attachment.encodedFile" style="height: 300px; width: 300px">
+                    <img *ngIf="attachment.type == 'image'" [src]= "attachment.encodedFile" style="height: 300px; width: 300px">
+                    <iframe src="{{attachment.path}}" *ngIf="attachment.type == 'video'" width="300" height="300">
+                    </iframe>
                   </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls{{myindex}}" role="button" data-slide="prev">
@@ -141,9 +142,8 @@
     </div>
 
     <div class="card" *ngIf="stepList.length == 0">
-      <p>Non ci sono zone</p>
+      <p>Non hai aggiunto ancora nessuno step alla manutenzione</p>
     </div>
   </div>
   </div>
-
 </div>
