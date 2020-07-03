@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpErrorResponse, HttpEvent} from '@angular/common/http';
 import { Attachment } from '../models/attachment';
 import { Observable, throwError } from 'rxjs';
 import { ApiVariables } from '../common/ApiVariables';
@@ -20,6 +20,7 @@ export class AttachmentService {
   private getAttachmentByIdUrl = ApiVariables.apiUrlAttachment + '/getById/';
   private saveAttachmentUrl = ApiVariables.apiUrlAttachment + '/save';
   private deleteAttachmentUrl = ApiVariables.apiUrlAttachment + '/delete/';
+  private uploadAttachmentUrl = ApiVariables.apiUrlAttachment + '/upload/';
 
   constructor(private http: HttpClient) { }
 
@@ -45,6 +46,13 @@ export class AttachmentService {
     return this.http.delete<Attachment>(this.deleteAttachmentUrl + id).pipe(
       catchError(this.handleError)
     );
+  }
+
+  uploadFile(file: File, type: string, step_id: number): Observable<HttpEvent<any>> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post<HttpEvent<any>>(this.uploadAttachmentUrl + type + '/' + step_id, formData, {responseType: 'text'} as any);
+
   }
 
   handleError(error: HttpErrorResponse) {

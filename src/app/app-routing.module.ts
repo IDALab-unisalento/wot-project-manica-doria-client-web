@@ -9,8 +9,12 @@ import { OperatorComponent } from './components/home/children/operator/operator.
 import { MachineComponent } from './components/home/children/machine/machine.component';
 import { BeaconComponent } from './components/home/children/beacon/beacon.component';
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
+<<<<<<< HEAD
 import { ProfileComponent } from './components/home/children/profile/profile.component';
 import { ChatComponent } from './components/home/children/chat/chat.component';
+=======
+import {ListUserMaintenanceComponent} from './components/home/children/list-user-maintenance/list-user-maintenance.component';
+>>>>>>> eb02714c22d897398098ca012a1e523473351d1e
 
 
 
@@ -28,8 +32,12 @@ const routes: Routes = [
       { path: 'maintenance', component: MaintenanceComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'list-maintenance', component: ListMaintenanceComponent },
+<<<<<<< HEAD
       { path: 'profile', component: ProfileComponent },
       { path: 'chat', component: ChatComponent }
+=======
+      { path: 'list-user-maintenance', component: ListUserMaintenanceComponent },
+>>>>>>> eb02714c22d897398098ca012a1e523473351d1e
     ],
     canActivate: [AuthGuardService]
   },
