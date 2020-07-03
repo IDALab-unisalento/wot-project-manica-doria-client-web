@@ -30,12 +30,8 @@ import { ListMaintenanceComponent } from './components/home/children/list-mainte
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
 import { SideMenuOpenComponent } from './components/home/components/side-menu-open/side-menu-open.component';
 import { SideMenuCloseComponent } from './components/home/components/side-menu-close/side-menu-close.component';
-import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
 import { ProfileComponent } from './components/home/children/profile/profile.component';
 import { ChatComponent } from './components/home/children/chat/chat.component';
-import { ListChatComponent } from './components/home/children/chat/list-chat/list-chat.component';
-import { BodyChatComponent } from './components/home/children/chat/body-chat/body-chat.component';
-import { ItemUserComponent } from './components/home/children/chat/item-user/item-user.component';
 
 @NgModule({
   declarations: [
@@ -51,12 +47,8 @@ import { ItemUserComponent } from './components/home/children/chat/item-user/ite
     DashboardComponent,
     SideMenuOpenComponent,
     SideMenuCloseComponent,
-    ListUserMaintenanceComponent,
     ProfileComponent,
-    ChatComponent,
-    ListChatComponent,
-    BodyChatComponent,
-    ItemUserComponent
+    ChatComponent
   ],
   imports: [
     BrowserModule,

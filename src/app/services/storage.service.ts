@@ -19,7 +19,6 @@ export class StorageService {
     localStorage.setItem('ID_KEY', String(user.id));
     localStorage.setItem('EMAIL_KEY', user.email);
     localStorage.setItem('NAME_KEY', user.name);
-    localStorage.setItem('SURNAME_KEY', user.surname);
     localStorage.setItem('ROLE_KEY', user.role);
   }
 
@@ -28,7 +27,7 @@ export class StorageService {
   }
 
   static getRole() {
-    return localStorage.getItem('NAME_KEY');
+    return localStorage.getItem('ROLE_KEY');
   }
 
   static getId() {

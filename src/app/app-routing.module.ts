@@ -9,6 +9,8 @@ import { OperatorComponent } from './components/home/children/operator/operator.
 import { MachineComponent } from './components/home/children/machine/machine.component';
 import { BeaconComponent } from './components/home/children/beacon/beacon.component';
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
+import { ProfileComponent } from './components/home/children/profile/profile.component';
+import { ChatComponent } from './components/home/children/chat/chat.component';
 
 
 
@@ -19,13 +21,15 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'chat', pathMatch: 'full' },
       { path: 'beacon', component: BeaconComponent },
       { path: 'machine', component: MachineComponent },
       { path: 'operator', component: OperatorComponent },
       { path: 'maintenance', component: MaintenanceComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'list-maintenance', component: ListMaintenanceComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'chat', component: ChatComponent }
     ],
     canActivate: [AuthGuardService]
   },

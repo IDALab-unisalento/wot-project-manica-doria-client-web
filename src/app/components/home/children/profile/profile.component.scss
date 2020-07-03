@@ -1,0 +1,91 @@
+
+.card-profile {
+  width: 1200px;
+  height: 800px;
+  background: #fff;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: 5px 5px 15px #aeaeae;
+  @media (max-width: 768px)  {
+    width: 600px; 
+    height: 400px;
+  }
+}
+
+.logo-login {
+  width: 256px; 
+  height: 256px;
+  position: fixed;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  
+  @media (max-width: 768px)  {
+    width: 192px; 
+    height: 192px;
+  }
+
+}
+
+.title h3{
+    margin: 10px 0 0 0px
+}
+.title h5{
+    margin: 0 0 0 5px
+}
+
+.info p {
+  font-size: large;
+  margin: 20px 0;
+}
+
+/* --------------------------------
+    Input With Icon
+---------------------------------*/
+
+.form-control {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #f0f0f0;
+    border: none;
+}
+
+.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    background-color: #f0f0f0;
+    border: none;
+    padding-right: 0;
+}
+
+.input-group-prepend {
+  padding: 10px 10px;
+}
+
+.form-control:focus,
+.form-control:focus-within {
+    color: #495057;
+    background-color: #f0f0f0;
+    border-left: none;
+    outline: 0;
+    box-shadow: none;
+}
+
+.button-login {
+  color: #fff;
+  width: 80%;
+  height: 40px;
+  border-radius: 50px;
+  border: none;
+  background: #57b846;
+
+}
+
+
+
+
+

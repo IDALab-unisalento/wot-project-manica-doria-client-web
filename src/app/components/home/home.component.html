@@ -1,7 +1,6 @@
 <app-navbar-home (showMenu)="_toggleSidebar()"></app-navbar-home>
 
 <ng-sidebar-container>
-
     <ng-sidebar dockedSize="90px" dock="true" mode="push" [opened]="_opened">
         <span *ngIf="_opened then open else close"></span>
     </ng-sidebar>
@@ -9,6 +8,7 @@
     <div ng-sidebar-content class="container">
         <router-outlet></router-outlet>
     </div>
+
 </ng-sidebar-container>
 
 

@@ -1,0 +1,55 @@
+<div class="card card-profile centered">
+    <div class="card-header">
+        User Profile
+    </div>
+    <div class="card-body">
+        <div class="row d-flex justify-content-center align-items-center">
+            <i style=" font-size: 200px;" class="align-middle fa fa-5x fa-user-circle"></i>
+        </div>
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="title">
+                <h3 style="text-transform: capitalize;"> Mario Rossi </h3>
+                <h5 style="color: #a0a0a0;"> Administrator </h5>
+            </div>
+        </div>
+        <hr style="margin: 20px 0 20px 0px; width: 100%;">
+        <div class="row">
+            <div class="col-2 info" style="margin-left: 50px; margin-bottom: 20px; border-left: 8px #379392 solid;">
+                <p>Name: </p>
+                <p>Surname: </p>
+                <p>BirthDay: </p>
+                <p>Serial Number: </p>
+                <p>Role: </p>
+            </div>
+            <div class="col-3 info">
+                <p>Mario</p>
+                <p>Rossi</p>
+                <p> 10 Gen 1987 </p>
+                <p> 20022993 </p>
+                <p>Administrator </p>
+            </div>
+            <div class="col-6">
+                <form #changePasswordForm="ngForm" (ngSubmit)='changePassword(changePasswordForm.value)'>
+                    <h5 class="text-center"><b>Login Responsabile</b></h5>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                        <input placeholder="Old Password" type="email" class="form-control">
+                    </div>
+
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                        <input placeholder="New Password" type="email" class="form-control">
+                    </div>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fa fa-lock"></i></div>
+                        <input placeholder="Confirm New Password" type="email" class="form-control">
+                    </div>
+
+                    <button type="submit" class="button-login" style="margin: 10px 0 0 50px;"
+                        [disabled]="!changePasswordForm.valid">
+                        Save </button>
+                </form>
+            </div>
+        </div>
+    </div>

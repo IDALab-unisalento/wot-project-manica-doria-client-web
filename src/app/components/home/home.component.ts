@@ -14,21 +14,14 @@ export class HomeComponent implements OnInit {
   _opened: boolean = true;
 
   constructor(
-
-    private userService: UserService,
-    private dataSharing: DataSharingService,
     private router: Router,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-
   }
 
   _toggleSidebar() {
     this._opened = !this._opened;
   }
 
-  goTo(path: string) {
-    this.router.navigate([path], { relativeTo: this.route });
-  }
 }

@@ -17,11 +17,8 @@ export class SideMenuOpenComponent implements OnInit {
   constructor(private dataSharing: DataSharingService) { }
 
   ngOnInit(): void {
-    this.user.name = StorageService.getValue('NAME_KEY');
-    this.user.surname = StorageService.getValue('SURNAME_KEY');
     this.dataSharing.getCurrentUser().subscribe(user => {
       this.user = user;
-      console.log(user);
     });
   }
 

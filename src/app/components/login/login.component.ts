@@ -37,9 +37,11 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/home');
         }
         this.loginDenied = true;
+        this.loginError = false;
       },
       error => {
         this.loginError = true;
+        this.loginDenied = false;
         console.log('err: ', error.message);
       }
     );
