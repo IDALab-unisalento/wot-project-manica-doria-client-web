@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import {Attachment} from '../../../../models/attachment';
 import {AttachmentService} from '../../../../services/attachment.service';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
+import {DomSanitizer} from '@angular/platform-browser';
+import {stringify} from 'querystring';
 
 @Component({
   selector: 'app-maintenance',
@@ -32,6 +34,7 @@ export class MaintenanceComponent implements OnInit {
 
   @ViewChild('name') name: any;
   @ViewChild('video') video: any;
+  sanitizedImageData: any;
 
   constructor(
     private machineService: MachineService,
@@ -39,6 +42,7 @@ export class MaintenanceComponent implements OnInit {
     private zoneService: ZoneService,
     private maintenanceService: MaintenanceService,
     private attachmentService: AttachmentService,
+    private sanitizer: DomSanitizer,
     private router: Router) { }
 
   ngOnInit() {
@@ -102,6 +106,13 @@ export class MaintenanceComponent implements OnInit {
     this.stepService.getStepByMaintenanceId(Number(maintenance)).subscribe(data => {
       this.stepList = data;
       console.log(this.stepList);
+      for (let i = 0; i < this.stepList.length; i++) {
+        this.attachmentService.getAttachment(this.stepList[i].id).subscribe(data => {
+          this.attachmentList = data;
+          console.log('ATTA', this.attachmentList);
+          this.stepList[i].attachmentList = this.attachmentList;
+        });
+      }
     });
   }
 
@@ -149,27 +160,24 @@ export class MaintenanceComponent implements OnInit {
       if (i !== 0) {
         this.stepList[i].status = 'to-do';
       }
-      if (this.stepList[i].attachmentList.length !== 0) {
-        for (let j = 0; j < this.stepList[i].attachmentList.length; j++) {
-          if (this.stepList[i].attachmentList[j].type === 'image') {
-            this.stepService.saveStep(this.stepList[i]).pipe(
-              switchMap(data => this.attachmentService.uploadFile(this.stepList[i].attachmentList[j].image, this.stepList[i].attachmentList[j].type, data.id))
-            ).subscribe(data => {
-              console.log(data);
-              this.router.navigateByUrl('/home/list-maintenance');
-
-            });
-          }
-          if (this.stepList[i].attachmentList[j].type === 'video') {
-            this.stepService.saveStep(this.stepList[i]).pipe(
-              switchMap(() => this.attachmentService.saveAttachment(this.stepList[i].attachmentList[j]))
-            ).subscribe(data => {
-              console.log(data);
-              this.router.navigateByUrl('/home/list-maintenance');
-            });
+      this.stepService.saveStep(this.stepList[i]).subscribe(data => {
+        console.log(data);
+        if (this.stepList[i].attachmentList.length !== 0) {
+          for (let j = 0; j < this.stepList[i].attachmentList.length; j++) {
+            if (this.stepList[i].attachmentList[j].type === 'image') {
+              this.attachmentService.uploadFile(this.stepList[i].attachmentList[j].file, this.stepList[i].attachmentList[j].type, data.id).subscribe(data2 => {
+                console.log(data2);
+              });
+            }
+            if (this.stepList[i].attachmentList[j].type === 'video') {
+              this.attachmentService.saveAttachment(this.stepList[i].attachmentList[j]).subscribe(data3 => {
+                console.log(data3);
+              });
+            }
           }
         }
-      }
+        this.router.navigateByUrl('/home/list-maintenance');
+      });
     }
   }
 
@@ -193,11 +201,22 @@ export class MaintenanceComponent implements OnInit {
     console.log(event);
     this.attachmentList = [];
     for (let i = 0; i < event.target.files.length; i++) {
-      this.attachment = {
-        image: event.target.files[i],
-        type: 'image',
+      const reader = new FileReader();
+      reader.readAsDataURL(event.target.files[i]);
+      reader.onloadend = () => {
+        const base64 = reader.result;
+        console.log(base64);
+        /*if (typeof base64 === 'string') {
+          this.sanitizedImageData = (this.sanitizer.bypassSecurityTrustUrl(base64));
+        }*/
+        //console.log('BS', this.sanitizedImageData);
+        this.attachment = {
+          file: event.target.files[i],
+          encodedFile: base64.toString(),
+          type: 'image',
+        };
+        this.attachmentList.push(this.attachment);
       };
-      this.attachmentList.push(this.attachment);
     }
     console.log(this.attachmentList);
   }

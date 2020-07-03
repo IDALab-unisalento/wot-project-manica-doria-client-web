@@ -1,7 +1,8 @@
 export interface Attachment {
 
     id?: number;
-    image?: File;
+    file?: File;
+    encodedFile?: string;
     path?: string;
     filename?: string;
     type?: string;

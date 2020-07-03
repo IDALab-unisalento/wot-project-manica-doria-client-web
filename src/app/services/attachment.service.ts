@@ -21,6 +21,7 @@ export class AttachmentService {
   private saveAttachmentUrl = ApiVariables.apiUrlAttachment + '/save';
   private deleteAttachmentUrl = ApiVariables.apiUrlAttachment + '/delete/';
   private uploadAttachmentUrl = ApiVariables.apiUrlAttachment + '/upload/';
+  private getFileAttachmentUrl = ApiVariables.apiUrlAttachment + '/getFile/';
 
   constructor(private http: HttpClient) { }
 
@@ -53,6 +54,10 @@ export class AttachmentService {
     formData.append('file', file);
     return this.http.post<HttpEvent<any>>(this.uploadAttachmentUrl + type + '/' + step_id, formData, {responseType: 'text'} as any);
 
+  }
+
+  getAttachment(id: number): Observable<Attachment[]> {
+    return this.http.get<Attachment[]>(this.getFileAttachmentUrl + id);
   }
 
   handleError(error: HttpErrorResponse) {
