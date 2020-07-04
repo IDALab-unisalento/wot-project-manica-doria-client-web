@@ -1,0 +1,35 @@
+.dimension {
+  @media ( min-width: 1280px) {
+    width: 1200px;
+
+  }
+  @media ( max-width: 768px) {
+    width: 600px;
+
+  }
+}
+
+.select-custom {
+
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+.btn-outline-secondary {
+  color: #379392;
+  border: 1px solid #379392;
+}
+
+.btn-outline-secondary:hover {
+  color: #f4f4f4;
+  border: 1px solid #f4f4f4;
+  background-color: #379392;
+}
+
+.border-color {
+  border-left: 5px  solid #379392; 
+}

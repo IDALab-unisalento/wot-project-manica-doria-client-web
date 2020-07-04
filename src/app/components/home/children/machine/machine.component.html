@@ -1,85 +1,113 @@
-<div class="row">
-  <div class="col-6">
+<div class="padding-md">
+  <div class="card shadow dimension">
 
-    <h2>Macchinario</h2>
+    <div class="card-header">
+      <h3>Machine and Zone</h3>
+    </div>
 
-    <div class="card">
-      <div class="input-group">
-        <select class="custom-select" id="inputGroupSelect01" (change)="getAllZoneByMachine()">
-          <option value = "0" selected>Choose...</option>
-          <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
-        </select>
-        <div class="input-group-append">
-            <button type = "submit" class="btn btn-outline-secondary" (click)="showAddMachine()">Aggiungi</button>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+
+          <!-- --------------- Selector Custom ---------------------->
+          <div class="row">
+            <div class="col padding-bottom-sm">
+              <div class="input-group" style="margin-right: 10px">
+                <select class="custom-select border-right-0" style="border-radius: 10px 0 0 10px;"
+                  id="inputGroupSelect01" (change)="getAllZoneByMachine()">
+                  <option value="0" selected>Choose a Machine...</option>
+                  <option *ngFor="let machine of machineList" value="{{machine.id}}">{{machine.name}}
+                    ({{machine.serialNumber}})
+                  </option>
+                </select>
+                <a class="btn border-top border-bottom" style="border-radius: 0; border: #cfd4d9"
+                  (click)="showAddMachine()">
+                  <i class="fa fa-plus-square-o fa-lg"></i>
+                </a>
+                <a class="btn border border-left-0" style="border-radius: 0 10px 10px 0; border: #cfd4d9"
+                  (click)=" deleteMachine()">
+                  <i class="fa fa-trash fa-lg text-danger"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-------------------------------------------------------->
+
+          <form *ngIf="isCreate">
+            <div class="form-group">
+              <input placeholder="Name Machine" type="text" class="form-control" #name name="name">
+            </div>
+
+            <div class="form-group">
+              <input placeholder="Serial Number" type="text" class="form-control" #serialNumber name="serialNumber">
+            </div>
+
+            <div class="d-flex justify-content-end padding-bottom-sm">
+              <button type="submit" class="btn btn-success"
+                (click)="addMachine(name.value, serialNumber.value)">Save</button>
+              <button type="submit" class="btn btn-danger" style=" margin-left: 10px;"
+                (click)="cancel()">Cancel</button>
+            </div>
+
+          </form>
+
+          <form *ngIf="isAddZone">
+            <div class="form-group">
+              <input placeholder="Zone Name" type="text" class="form-control" #name name="name">
+            </div>
+
+            <select class="custom-select form-control" id="inputGroupSelect02">
+              <option value="0" selected>Choose a color to associate</option>
+              <option *ngFor="let beacon of beaconList" value="{{beacon.id}}">{{beacon.name}} ({{beacon.mac}})</option>
+            </select>
+
+            <div class="d-flex justify-content-end padding-top-sm">
+              <button type="submit" class="btn btn-success" (click)="addZone(name.value)">Save</button>
+              <button type="submit" class="btn btn-danger" style=" margin-left: 10px;"
+                (click)="cancelZone()">Cancel</button>
+            </div>
+
+          </form>
+
         </div>
-        <div class="input-group-append">
-        <button class="btn bg-transparent" (click) = "deleteMachine()">
-          <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
-          </svg>
-        </button>
+
+        <div class="col" *ngIf="machineSelected !== '0' ">
+          <div class="row">
+            <div class="col-3">
+              <button class="btn btn-outline-secondary" (click)="showAddZone()">
+                Add Zone <i class="fa fa-plus-square-o fa-lg"></i>
+              </button>
+            </div>
+          </div>
+          <div *ngIf="zoneList.length !== 0; else elseBlock">
+            <ul class="list-group" *ngFor="let zone of zoneList, let myindex = index">
+              <li class="list-group-item border-0">
+                <div class="row">
+                  <div class="col-10 border-color">
+                    <b>Zone Name: </b>{{zone.name}}
+                    <br>
+                    <b>Beacon: </b>
+                    <br>
+                    <span style="margin-left: 20px"><b>Name</b> {{zone.beacon.name}}</span>
+                    <br>
+                    <span style="margin-left: 20px"><b>MAC</b> {{zone.beacon.mac}}</span>
+                  </div>
+
+                  <div class="col-2 d-flex justify-content-end">
+                    <a class="btn bg-transparent fa-lg " style="color: #960000; "
+                      (click)="deleteZone(zone.id, myindex)">
+                      <i class="fa fa-trash fa-lg" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-
-      <form *ngIf="isCreate">
-        <div class = "form-group">
-          <label>Nome Macchinario</label>
-          <input type="text" class="form-control"
-                 #name
-                 name="name">
-        </div>
-
-        <div class = "form-group">
-          <label>Serial Number</label>
-          <input type="text" class="form-control"
-                 #serialNumber
-                 name="serialNumber">
-        </div>
-        <button type = "submit" class="btn btn-primary" (click)="addMachine(name.value, serialNumber.value)">Crea</button>
-        <button type = "submit" class="btn btn-primary" (click)="hideAddMachine()">Annulla</button>
-      </form>
-    </div>
-
-    <h2>Aggiungi Zona</h2>
-
-    <div class="card">
-      <form>
-        <div class = "form-group">
-          <label>Nome Zona</label>
-          <input type="text" class="form-control"
-                 #name
-                 name="name">
-        </div>
-
-        <h3>Associa Beacon</h3>
-        <select class="form-control" id="inputGroupSelect02">
-          <option value = "0" selected>Choose...</option>
-          <option *ngFor="let beacon of beaconList" value="{{beacon.id}}">{{beacon.name}} ({{beacon.mac}})</option>
-        </select>
-
-        <button type = "submit" class="btn btn-outline-secondary" (click)="addZone(name.value)">Aggiungi Zona</button>
-      </form>
-    </div>
-
-
-  </div>
-  <div class="col-6">
-    <h2>Zona Macchiario</h2>
-    <div class="card" *ngIf="zoneList.length != 0">
-      <ul class="list-group" *ngFor="let zone of zoneList, let myindex = index">
-        <li class="list-group-item">
-          {{zone.name}} (Beacon associato: {{zone.beacon.name}})
-          <button class="btn bg-transparent" (click) = "deleteZone(zone.id, myindex)">
-            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="red" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"></path>
-            </svg>
-          </button>
-        </li>
-      </ul>
-    </div>
-    <div class="card" *ngIf="zoneList.length == 0">
-      <p>Non ci sono zone</p>
     </div>
   </div>
-</div>
 
+  <ng-template #elseBlock>
+    <h5 class="d-flex justify-content-center"> Zone not Found </h5>
+  </ng-template>

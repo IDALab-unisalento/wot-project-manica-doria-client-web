@@ -33,8 +33,8 @@
         color: var(--light-light);
     }
 
-    /*  ----------------------------------
-                POSITION
+/*  ----------------------------------
+            POSITION
     ---------------------------------- */
 
     .centered {
@@ -46,4 +46,13 @@
 
     a, span {
         outline: none;
+    }
+
+/*  ----------------------------------
+        Component Bootstrap
+    ---------------------------------- */
+
+    div.card-header {
+        background-color: #379392;
+        color: whitesmoke;
     }

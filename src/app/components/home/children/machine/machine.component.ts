@@ -10,12 +10,14 @@ import { Machine } from 'src/app/models/machine';
 @Component({
   selector: 'app-machine',
   templateUrl: './machine.component.html',
-  styleUrls: ['./machine.component.css']
+  styleUrls: ['./machine.component.scss']
 })
 export class MachineComponent implements OnInit {
 
   @ViewChild('name') name: any;
   @ViewChild('serialNumber') serialNumber: any;
+  @ViewChild('inputGroupSelect01') select: HTMLInputElement;
+
 
   machineList: Machine[];
   beaconList: Beacon[];
@@ -24,6 +26,9 @@ export class MachineComponent implements OnInit {
   zone: Zone;
 
   isCreate = false;
+  isAddZone = false;
+  isSelectedMachine = false;
+  machineSelected: string;
 
   constructor(private machineService: MachineService, private beaconService: BeaconService, private zoneService: ZoneService) { }
 
@@ -32,6 +37,7 @@ export class MachineComponent implements OnInit {
     this.getAllBeacon();
     this.getAllZoneByMachine();
   }
+
 
   getAllMachine() {
     this.machineService.getAllMachine().subscribe(data => {
@@ -46,8 +52,8 @@ export class MachineComponent implements OnInit {
   }
 
   getAllZoneByMachine() {
-    const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
-    this.zoneService.getAllZoneByMachineId(Number(machine)).subscribe(data => {
+    this.machineSelected = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    this.zoneService.getAllZoneByMachineId(Number(this.machineSelected)).subscribe(data => {
       this.zoneList = data;
       console.log(this.zoneList);
     });
@@ -55,6 +61,14 @@ export class MachineComponent implements OnInit {
 
   showAddMachine() {
     this.isCreate = true;
+  }
+
+  showAddZone() {
+    this.isAddZone = true;
+  }
+
+  hideAddZone() {
+    this.isAddZone = false;
   }
 
   hideAddMachine() {
@@ -86,7 +100,7 @@ export class MachineComponent implements OnInit {
 
   deleteMachine() {
     const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
-    if (machine !== 'Choose...') {
+    if (machine !== 'Choose a Machine...') {
       this.machineService.deleteMachine(machine).subscribe(data => {
         console.log(data);
         this.getAllMachine();
@@ -97,7 +111,8 @@ export class MachineComponent implements OnInit {
   addZone(name: string) {
     const machine = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
     const beacon = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
-    if (machine !== 'Choose...' && beacon !== 'Choose...') {
+    this.isAddZone = true;
+    if (machine !== 'Choose a Machine...' && beacon !== 'Choose a Machine...') {
       this.zone = {
         name,
         beacon: {
@@ -112,6 +127,18 @@ export class MachineComponent implements OnInit {
         console.log(data);
         this.getAllZoneByMachine();
       });
+      this.cancelZone();
     }
+
+  }
+
+  cancel() {
+    this.name.nativeElement.value = null;
+    this.serialNumber.nativeElement.value = null;
+    this.isCreate = false;
+  }
+  cancelZone() {
+    this.name.nativeElement.value = null;
+    this.isAddZone = false;
   }
 }

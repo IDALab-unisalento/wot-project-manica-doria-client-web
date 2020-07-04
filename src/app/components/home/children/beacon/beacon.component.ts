@@ -5,7 +5,7 @@ import { Beacon } from '../../../../models/beacon';
 @Component({
   selector: 'app-beacon',
   templateUrl: './beacon.component.html',
-  styleUrls: ['./beacon.component.css']
+  styleUrls: ['./beacon.component.scss']
 })
 export class BeaconComponent implements OnInit {
 
@@ -78,9 +78,10 @@ export class BeaconComponent implements OnInit {
     });
   }
 
-  annulla() {
+  cancel() {
     this.name.nativeElement.value = null;
     this.mac.nativeElement.value = null;
     this.isModify = false;
   }
+
 }

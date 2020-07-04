@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../../../models/user';
-import {UserService} from '../../../../services/user.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { User } from '../../../../models/user';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-operator',
@@ -45,6 +45,12 @@ export class OperatorComponent implements OnInit {
     this.userService.saveUser(this.user).subscribe(data => {
       console.log(data);
       this.userList.push(data);
+      this.name.nativeElement.value = null;
+      this.surname.nativeElement.value = null;
+      this.email.nativeElement.value = null;
+      this.password.nativeElement.value = null;
+      this.serialNumber.nativeElement.value = null;
+
     });
   }
 
