@@ -43,7 +43,7 @@ export class MaintenanceService {
       );
   }
 
-  getMaintenanceById(id: string): Observable<Maintenance> {
+  getMaintenanceById(id: number): Observable<Maintenance> {
     return this.http.get<Maintenance>(this.getMaintenanceByIdUrl + id)
       .pipe(
         catchError(this.handleError)

@@ -146,7 +146,7 @@ export class MaintenanceComponent implements OnInit {
 
   // aggiungiamo lo step all'array degli step che poi andremo a salvare definitivamente nel db premendo il tasto salva e completa
   addStep() {
-    /*if (this.video != null) {
+    if (this.video != null) {
       console.log(this.video);
       const videoY = this.video.split('watch?v=').join('embed/');
       this.sanitizedImageData = (this.sanitizer.bypassSecurityTrustUrl(videoY));
@@ -156,7 +156,7 @@ export class MaintenanceComponent implements OnInit {
         type: 'video',
       };
       this.attachmentList.push(this.attachment);
-    }*/
+    }
     this.step = {
       name: this.name.nativeElement.value,
       description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
@@ -247,5 +247,9 @@ export class MaintenanceComponent implements OnInit {
         this.router.navigateByUrl('/home/list-maintenance');
       });
     }
+  }
+
+  iframeDidLoad(path: string) {
+    (document.getElementById('myIframe') as HTMLInputElement).setAttribute('src', path);
   }
 }

@@ -1,0 +1,18 @@
+<h2>Dettagli Manutenzione</h2>
+
+<h3>{{maintenance?.name}} ({{maintenance?.type}})</h3>
+
+<h3>Lista Step</h3>
+<div  class="card" style="width: 46rem;">
+  <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
+    <li class="list-group-item">
+      <b>Nome: </b>{{step.name}}
+      <br>
+      <b>Descrizione: </b>{{step.description}}
+      <br>
+      <b>Durata prevista: </b>{{step.estimateDuration}}
+      <br>
+      <b>Durata effettiva: </b>{{step.duration}}
+    </li>
+  </ul>
+</div>

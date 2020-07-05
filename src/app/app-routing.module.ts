@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/home/children/dashboard/dashboa
 import { ProfileComponent } from './components/home/children/profile/profile.component';
 import { ChatComponent } from './components/home/children/chat/chat.component';
 import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
+import {DetailsMaintenanceComponent} from './components/home/children/details-maintenance/details-maintenance.component';
 
 
 
@@ -32,6 +33,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'chat', component: ChatComponent },
       { path: 'list-user-maintenance', component: ListUserMaintenanceComponent },
+      { path: 'details-maintenance/:id-maintenance', component: DetailsMaintenanceComponent },
     ],
     canActivate: [AuthGuardService]
   },

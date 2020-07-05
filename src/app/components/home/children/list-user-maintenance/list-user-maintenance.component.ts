@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserMaintenance} from '../../../../models/user-maintenance';
 import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-user-maintenance',
@@ -11,9 +12,10 @@ export class ListUserMaintenanceComponent implements OnInit {
 
   userMaintenanceList: UserMaintenance[];
 
-  constructor(private userMaintenanceService: UserMaintenanceService) { }
+  constructor(private userMaintenanceService: UserMaintenanceService, private router: Router) { }
 
   ngOnInit(): void {
+    this.getAllUserMaintenanceByStatus('in-progress');
   }
 
   getAllUserMaintenanceByStatus(status: string) {
@@ -23,4 +25,8 @@ export class ListUserMaintenanceComponent implements OnInit {
     });
   }
 
+  goToDetailsMaintenance(id: number) {
+    console.log('Details');
+    this.router.navigateByUrl('/home/details-maintenance/' + id);
+  }
 }

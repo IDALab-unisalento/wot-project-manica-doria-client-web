@@ -9,8 +9,12 @@
 <h3>Lista Manutenzioni</h3>
 <div  class="card" style="width: 46rem;">
   <ul class="list-group" *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
-    <li class="list-group-item">
-      <b>Nome: </b>{{userMaintenance.maintenance.name}} <b>Operatore: </b>{{userMaintenance.user.name}}
-    </li>
+      <li class="list-group-item, btn bg-transparent" (click)="goToDetailsMaintenance(userMaintenance.maintenance.id)">
+        <b>Nome: </b>{{userMaintenance.maintenance.name}}
+        <br>
+        <b>Tipo: </b>{{userMaintenance.maintenance.type}}
+        <br>
+        <b>Operatore: </b>{{userMaintenance.user.name}}
+      </li>
   </ul>
 </div>

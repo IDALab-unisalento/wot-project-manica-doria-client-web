@@ -116,7 +116,7 @@
                 <div class="carousel-inner">
                   <div class="carousel-item" *ngFor= "let attachment of step.attachmentList, let isFirst = first" [ngClass]="{active:isFirst}">
                     <img *ngIf="attachment.type == 'image'" [src]= "attachment.encodedFile" style="height: 300px; width: 300px">
-                    <iframe src="{{attachment.path}}" *ngIf="attachment.type == 'video'" width="300" height="300">
+                    <iframe id="myIframe" src="" *ngIf="attachment.type == 'video'" width="300" height="300" (load)="iframeDidLoad(attachment.path)">
                     </iframe>
                   </div>
                 </div>

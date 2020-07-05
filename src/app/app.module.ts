@@ -36,6 +36,8 @@ import { ChatComponent } from './components/home/children/chat/chat.component';
 import { ListChatComponent } from './components/home/children/chat/list-chat/list-chat.component';
 import { BodyChatComponent } from './components/home/children/chat/body-chat/body-chat.component';
 import { ItemUserComponent } from './components/home/children/chat/item-user/item-user.component';
+import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
+import { SafePipeModule } from 'safe-pipe';
 
 
 
@@ -59,6 +61,7 @@ import { ItemUserComponent } from './components/home/children/chat/item-user/ite
     ListChatComponent,
     BodyChatComponent,
     ItemUserComponent,
+    DetailsMaintenanceComponent,
 
   ],
   imports: [
@@ -67,7 +70,7 @@ import { ItemUserComponent } from './components/home/children/chat/item-user/ite
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-
+    SafePipeModule,
   ],
   providers: [
     MaintenanceService,
