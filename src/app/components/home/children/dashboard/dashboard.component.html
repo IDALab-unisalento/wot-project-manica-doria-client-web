@@ -1,4 +1,18 @@
-<p>Dashboard</p>
+<h2>Dashboard</h2>
 
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h6>Manutenzioni attive: {{userMaintenanceListStarted.length}}</h6>
+      <h6>Manutenzioni in corso: {{userMaintenanceListInProgress.length}}</h6>
+      <h6>Manutenzioni completate: {{userMaintenanceListCompleted.length}}</h6>
 
-<button type = "submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">User Maintenance</button>
+      <button type = "submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">Via alla Lista</button>
+    </div>
+    <div class="col">
+      <canvas id="myPieChart" width="30" height="30"></canvas>
+    </div>
+  </div>
+</div>
+
+<canvas id="myLineChart" width="30" height="30"></canvas>

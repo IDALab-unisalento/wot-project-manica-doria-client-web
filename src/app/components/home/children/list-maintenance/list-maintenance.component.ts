@@ -58,8 +58,10 @@ export class ListMaintenanceComponent implements OnInit {
   }
 
   forwardMaintenance() {
-    const user = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    const user = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
     const maintenance = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    console.log(user);
+    console.log(maintenance);
     this.userMaintenance = {
       user: {
         id: Number(user),

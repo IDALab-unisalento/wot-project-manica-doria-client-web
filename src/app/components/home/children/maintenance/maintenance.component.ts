@@ -160,6 +160,7 @@ export class MaintenanceComponent implements OnInit {
     this.step = {
       name: this.name.nativeElement.value,
       description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
+      //duration: (document.getElementById('appt') as HTMLInputElement).value,
       zone: this.zone,
       maintenance: {
         id: Number((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value),
@@ -250,6 +251,12 @@ export class MaintenanceComponent implements OnInit {
   }
 
   iframeDidLoad(path: string) {
-    (document.getElementById('myIframe') as HTMLInputElement).setAttribute('src', path);
+    console.log(path);
+    //(document.getElementById('myIframe') as HTMLInputElement).setAttribute('src', path);
+  }
+
+  print() {
+    const time = (document.getElementById('appt') as HTMLInputElement).value;
+    console.log(time);
   }
 }

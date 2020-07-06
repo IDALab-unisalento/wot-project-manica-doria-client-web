@@ -37,9 +37,6 @@ import { ListChatComponent } from './components/home/children/chat/list-chat/lis
 import { BodyChatComponent } from './components/home/children/chat/body-chat/body-chat.component';
 import { ItemUserComponent } from './components/home/children/chat/item-user/item-user.component';
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
-import { SafePipeModule } from 'safe-pipe';
-
-
 
 @NgModule({
   declarations: [
@@ -70,7 +67,6 @@ import { SafePipeModule } from 'safe-pipe';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    SafePipeModule,
   ],
   providers: [
     MaintenanceService,

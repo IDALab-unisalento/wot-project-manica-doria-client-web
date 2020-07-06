@@ -36,7 +36,7 @@ export class UserMaintenanceService {
     );
   }
 
-  getUMById(id: string): Observable<UserMaintenance> {
+  getUMById(id: number): Observable<UserMaintenance> {
     return this.http.get<UserMaintenance>(this.getUMByIdUrl + id).pipe(
       catchError(this.handleError)
     );
