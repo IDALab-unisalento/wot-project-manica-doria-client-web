@@ -6,6 +6,7 @@ import {UserService} from '../../../../services/user.service';
 import {Router} from '@angular/router';
 import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
 import {UserMaintenance} from '../../../../models/user-maintenance';
+import {split} from 'ts-node';
 
 @Component({
   selector: 'app-list-maintenance',
@@ -26,6 +27,9 @@ export class ListMaintenanceComponent implements OnInit {
   ngOnInit() {
     this.getAllMaintenanceToSend();
     this.getAllUser();
+    const date = new Date().toISOString();
+    const dateSql = date.split('.');
+    console.log(dateSql[0]);
   }
 
   getAllMaintenanceToSend() {
@@ -60,6 +64,9 @@ export class ListMaintenanceComponent implements OnInit {
   forwardMaintenance() {
     const user = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
     const maintenance = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
+    const date = new Date().toISOString();
+    const dateSql = date.split('.');
+    console.log(dateSql);
     console.log(user);
     console.log(maintenance);
     this.userMaintenance = {
@@ -69,9 +76,10 @@ export class ListMaintenanceComponent implements OnInit {
       maintenance: {
         id: Number(maintenance),
       },
-      data: new Date(),
+      data: dateSql[0],
       status: 'in-progress',
     };
+    console.log(this.userMaintenance);
     this.userMaintenanceService.saveUM(this.userMaintenance).subscribe(data => {
       console.log(data);
       this.getAllMaintenanceToSend();

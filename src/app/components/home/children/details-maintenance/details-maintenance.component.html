@@ -24,7 +24,7 @@
   <div class="card" style="width: 46rem;">
     <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
       <li class="list-group-item">
-        <b>Nome: </b>{{step.name}}
+        <i *ngIf="step.status == 'completed'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="step.status == 'started'" class="fa fa-circle-o" aria-hidden="true"></i> <i *ngIf="step.status == 'to-do'" class="fa fa-times" aria-hidden="true"></i> <b> Nome: </b>{{step.name}}
         <br>
         <b>Descrizione: </b>{{step.description}}
         <br>
@@ -38,7 +38,10 @@
   <h3>Lista Step Completed</h3>
 
   <h6>Numero di Step: {{stepList?.length}}</h6>
-  <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+  <div style="width: 500px">
+    <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+  </div>
+
 
   <div class="card" style="width: 46rem;">
     <ul class="list-group" *ngFor="let step of stepList, let myindex = index">

@@ -3,16 +3,46 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h6>Manutenzioni attive: {{userMaintenanceListStarted.length}}</h6>
-      <h6>Manutenzioni in corso: {{userMaintenanceListInProgress.length}}</h6>
-      <h6>Manutenzioni completate: {{userMaintenanceListCompleted.length}}</h6>
+      <div class="container">
+        <div class="card" style="width: 500px; height: 300px">
+          <h2>Manutenzioni</h2>
+          <div class="row">
+            <div class="col">
+              <h6>Manutenzioni attive: {{userMaintenanceListStarted.length}}</h6>
+              <h6>Manutenzioni in corso: {{userMaintenanceListInProgress.length}}</h6>
+              <h6>Manutenzioni completate: {{userMaintenanceListCompleted.length}}</h6>
 
-      <button type = "submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">Via alla Lista</button>
+              <button type = "submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">Via alla Lista</button>
+            </div>
+            <div class="col">
+              <div style="width: 200px;">
+                <canvas id="myPieChart" width="30" height="30"></canvas>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     <div class="col">
-      <canvas id="myPieChart" width="30" height="30"></canvas>
+      <div class="container">
+        <div class="card" style="width: 500px; height: 300px">
+          <h2>Macchinari</h2>
+          <div class="input-group">
+            <select class="custom-select" id="inputGroupSelect01" (change)="getAllMaintenanceByMachine()">
+              <option value = "0" selected>Choose...</option>
+              <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
+            </select>
+          </div>
+          <div>
+            <div style="width: 390px;">
+              <canvas id="bar-chart" width="800" height="450"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<canvas id="myLineChart" width="30" height="30"></canvas>
