@@ -37,6 +37,7 @@ import { ListChatComponent } from './components/home/children/chat/list-chat/lis
 import { BodyChatComponent } from './components/home/children/chat/body-chat/body-chat.component';
 import { ItemUserComponent } from './components/home/children/chat/item-user/item-user.component';
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
+import { CarouselComponent } from './components/home/children/maintenance/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { DetailsMaintenanceComponent } from './components/home/children/details-
     BodyChatComponent,
     ItemUserComponent,
     DetailsMaintenanceComponent,
+    CarouselComponent,
 
   ],
   imports: [

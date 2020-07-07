@@ -16,3 +16,19 @@
 .border-color {
   border-left: 5px  solid #379392; 
 }
+
+.dimension {
+  @media ( min-width: 1280px) {
+    width: 1200px;
+
+  }
+  @media ( max-width: 768px) {
+    width: 600px;
+
+  }
+}
+
+.bg-modal {
+  color: #f4f4f4;
+  background: #379392;
+}

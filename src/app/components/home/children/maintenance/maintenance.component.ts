@@ -1,3 +1,4 @@
+import { Beacon } from './../../../../models/beacon';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Machine } from '../../../../models/machine';
 import { Zone } from '../../../../models/zone';
@@ -31,7 +32,14 @@ export class MaintenanceComponent implements OnInit {
   attachment: Attachment;
   video: string;
   isCreate = false;
+
+
   fileName = 'Select one or more Image';
+  selectedStep = {
+    zone: {
+      beacon: {}
+    }
+  } as Step;
 
   @ViewChild('name') name: any;
   //@ViewChild('video') video: any;
@@ -269,6 +277,11 @@ export class MaintenanceComponent implements OnInit {
     for (const image of images) {
       this.fileName = this.fileName + image.name + '; ';
     }
+  }
+
+  selectStepDetails(step: Step) {
+    this.attachmentList = step.attachmentList;
+    this.selectedStep = step;
   }
 
 }
