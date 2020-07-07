@@ -6,7 +6,6 @@ import {UserService} from '../../../../services/user.service';
 import {Router} from '@angular/router';
 import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
 import {UserMaintenance} from '../../../../models/user-maintenance';
-import {split} from 'ts-node';
 
 @Component({
   selector: 'app-list-maintenance',
@@ -64,11 +63,8 @@ export class ListMaintenanceComponent implements OnInit {
   forwardMaintenance() {
     const user = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
     const maintenance = (document.getElementById('inputGroupSelect01') as HTMLInputElement).value;
-    const date = new Date().toISOString();
-    const dateSql = date.split('.');
-    console.log(dateSql);
-    console.log(user);
-    console.log(maintenance);
+    const date = new Date();
+    date.setHours(date.getHours() + 2); // +2 italy date
     this.userMaintenance = {
       user: {
         id: Number(user),
@@ -76,7 +72,7 @@ export class ListMaintenanceComponent implements OnInit {
       maintenance: {
         id: Number(maintenance),
       },
-      data: dateSql[0],
+      date: date.toISOString(),
       status: 'in-progress',
     };
     console.log(this.userMaintenance);

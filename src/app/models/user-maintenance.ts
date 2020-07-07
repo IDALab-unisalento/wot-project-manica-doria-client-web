@@ -6,6 +6,6 @@ export interface UserMaintenance {
     id?: number;
     user?: User;
     maintenance?: Maintenance;
-    data?: string;
+    date?: string;
     status?: string;
 }
