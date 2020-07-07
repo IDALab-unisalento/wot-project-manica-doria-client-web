@@ -12,7 +12,7 @@ import { DashboardComponent } from './components/home/children/dashboard/dashboa
 import { ProfileComponent } from './components/home/children/profile/profile.component';
 import { ChatComponent } from './components/home/children/chat/chat.component';
 import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
-import {DetailsMaintenanceComponent} from './components/home/children/details-maintenance/details-maintenance.component';
+import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
 
 
 
@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      { path: '', redirectTo: 'machine', pathMatch: 'full' },
+      { path: '', redirectTo: 'maintenance', pathMatch: 'full' },
       { path: 'beacon', component: BeaconComponent },
       { path: 'machine', component: MachineComponent },
       { path: 'operator', component: OperatorComponent },

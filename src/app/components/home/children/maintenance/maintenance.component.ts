@@ -8,15 +8,15 @@ import { StepService } from '../../../../services/step.service';
 import { MaintenanceService } from '../../../../services/maintenance.service';
 import { Maintenance } from '../../../../models/maintenance';
 import { Router } from '@angular/router';
-import {Attachment} from '../../../../models/attachment';
-import {AttachmentService} from '../../../../services/attachment.service';
-import {map, mergeMap, switchMap} from 'rxjs/operators';
-import {DomSanitizer} from '@angular/platform-browser';
+import { Attachment } from '../../../../models/attachment';
+import { AttachmentService } from '../../../../services/attachment.service';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-maintenance',
   templateUrl: './maintenance.component.html',
-  styleUrls: ['./maintenance.component.css']
+  styleUrls: ['./maintenance.component.scss']
 })
 export class MaintenanceComponent implements OnInit {
 
@@ -31,6 +31,7 @@ export class MaintenanceComponent implements OnInit {
   attachment: Attachment;
   video: string;
   isCreate = false;
+  fileName = 'Select one or more Image';
 
   @ViewChild('name') name: any;
   //@ViewChild('video') video: any;
@@ -176,7 +177,9 @@ export class MaintenanceComponent implements OnInit {
     this.attachmentList = [];
     this.name.nativeElement.value = null;
     (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value = null;
-    (document.getElementById('exampleFormControlFile1') as HTMLInputElement).value = null;
+    (document.getElementById('inputImage') as HTMLInputElement).value = null;
+
+
     this.video = null;
   }
 
@@ -194,8 +197,9 @@ export class MaintenanceComponent implements OnInit {
 
   // salviamo le foto prese dal pc nell'array degli attachment per poi poterle salvare nel db
   onFileSelected(event) {
-    console.log(event);
+    console.log('Event: ', event);
     this.attachmentList = [];
+    this.printImageSelected(event.target.files);
     for (let i = 0; i < event.target.files.length; i++) {
       const reader = new FileReader();
       reader.readAsDataURL(event.target.files[i]);
@@ -259,4 +263,12 @@ export class MaintenanceComponent implements OnInit {
     const time = (document.getElementById('appt') as HTMLInputElement).value;
     console.log(time);
   }
+
+  printImageSelected(images: any) {
+    this.fileName = '';
+    for (const image of images) {
+      this.fileName = this.fileName + image.name + '; ';
+    }
+  }
+
 }
