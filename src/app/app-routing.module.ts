@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      { path: '', redirectTo: 'maintenance', pathMatch: 'full' },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'beacon', component: BeaconComponent },
       { path: 'machine', component: MachineComponent },
       { path: 'operator', component: OperatorComponent },

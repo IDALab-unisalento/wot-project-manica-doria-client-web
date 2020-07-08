@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Maintenance } from '../../../../models/maintenance';
 import { MaintenanceService } from '../../../../services/maintenance.service';
-import {User} from '../../../../models/user';
-import {UserService} from '../../../../services/user.service';
-import {Router} from '@angular/router';
-import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
-import {UserMaintenance} from '../../../../models/user-maintenance';
+import { User } from '../../../../models/user';
+import { UserService } from '../../../../services/user.service';
+import { Router } from '@angular/router';
+import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
+import { UserMaintenance } from '../../../../models/user-maintenance';
 
 @Component({
   selector: 'app-list-maintenance',
   templateUrl: './list-maintenance.component.html',
-  styleUrls: ['./list-maintenance.component.css']
+  styleUrls: ['./list-maintenance.component.scss']
 })
 export class ListMaintenanceComponent implements OnInit {
 
@@ -18,10 +18,11 @@ export class ListMaintenanceComponent implements OnInit {
   userList: User[];
   userMaintenance: UserMaintenance;
 
-  constructor(private maintenanceService: MaintenanceService,
-              private userMaintenanceService: UserMaintenanceService,
-              private userService: UserService,
-              private router: Router) { }
+  constructor(
+    private maintenanceService: MaintenanceService,
+    private userMaintenanceService: UserMaintenanceService,
+    private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.getAllMaintenanceToSend();

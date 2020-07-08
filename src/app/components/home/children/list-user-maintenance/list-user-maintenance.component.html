@@ -1,24 +1,27 @@
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option1" autocomplete="off" (click)="getAllUserMaintenanceByStatus('started')" > Attive
+    <input type="radio" name="options" id="option1" autocomplete="off"
+      (click)="getAllUserMaintenanceByStatus('started')"> Attive
   </label>
   <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="option2" autocomplete="off" (click)="getAllUserMaintenanceByStatus('in-progress')" checked> In Corso
+    <input type="radio" name="options" id="option2" autocomplete="off"
+      (click)="getAllUserMaintenanceByStatus('in-progress')" checked> In Corso
   </label>
   <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off" (click)="getAllUserMaintenanceByStatus('completed')"> Completate
+    <input type="radio" name="options" id="option3" autocomplete="off"
+      (click)="getAllUserMaintenanceByStatus('completed')"> Completate
   </label>
 </div>
 
 <h3>Lista Manutenzioni</h3>
-<div  class="card" style="width: 46rem;">
+<div class="card" style="width: 46rem;">
   <ul class="list-group" *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
-      <li class="list-group-item, btn bg-transparent" (click)="goToDetailsMaintenance(userMaintenance.id)">
-        <b>Nome: </b>{{userMaintenance.maintenance.name}}
-        <br>
-        <b>Tipo: </b>{{userMaintenance.maintenance.type}}
-        <br>
-        <b>Operatore: </b>{{userMaintenance.user.name}}
-      </li>
+    <li class="list-group-item, btn bg-transparent" (click)="goToDetailsMaintenance(userMaintenance.id)">
+      <b>Nome: </b>{{userMaintenance.maintenance.name}}
+      <br>
+      <b>Tipo: </b>{{userMaintenance.maintenance.type}}
+      <br>
+      <b>Operatore: </b>{{userMaintenance.user.name}}
+    </li>
   </ul>
 </div>

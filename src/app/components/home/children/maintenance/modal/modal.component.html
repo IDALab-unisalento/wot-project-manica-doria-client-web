@@ -1,0 +1,53 @@
+<div class="modal-dialog modal-dialog-centered modal-xl modal-custom">
+    <div class="modal-content ">
+
+        <!-- Modal Header -->
+        <div class="modal-header bg-modal">
+            <h4 class="modal-title">Step Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+            <div style="margin: 0 50px;" class="d-flex justify-content-center">
+                <app-carousel [pics]="this.attachmentList"></app-carousel>
+            </div>
+        </div>
+
+
+
+        <div class=" row border-color" style="margin: 20px">
+            <div class="col-3">
+                <b>Description:</b>
+                <br>
+                <b>Estimated Duration:</b>
+                <br>
+                <b>Work Zone:</b>
+                <div style="margin-left: 20px">
+                    <b>Name:</b>
+                    <div>
+                        <b>Beacon:</b>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-9">
+                {{stepSelected.name}}
+                <br>
+                {{stepSelected.estimateDuration}}
+                <br>
+                <br>
+                {{stepSelected.zone.name}}
+                <br>
+                {{stepSelected.zone.beacon.name}}
+            </div>
+        </div>
+
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        </div>
+
+    </div>
+</div>

@@ -41,6 +41,7 @@ export class OperatorComponent implements OnInit {
       email,
       password,
       serialNumber,
+      role: 'operator'
     };
     this.userService.saveUser(this.user).subscribe(data => {
       console.log(data);

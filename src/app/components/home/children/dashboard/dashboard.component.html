@@ -1,5 +1,99 @@
-<h2>Dashboard</h2>
+<div class="container-12 padding-0">
+  <h4 style="color: #7e7e7e;"> Dashboard </h4>
+  <hr width="100%" class="pdb10">
 
+  <div class="row">
+    <div class="col-4">
+      <div class="card card-chart shadow-sm bg-gray">
+        <div class="card-body">
+          <div style="color: #7e7e7e;">
+            <h5 style="color: #7e7e7e;"> Maintenance Status </h5>
+            <hr width="100%" class="pdb10">
+          </div>
+          <div class="d-flex justify-content-center">
+            <canvas id="myPieChart" class=" d-block w-100" style="width: 200px; height: 200px;"></canvas>
+          </div>
+          <ul class="list-group list-group-flush pdt10" style="padding-bottom: 0;">
+            <li class="list-group-item bg-gray border-0">
+              <a class="text-white btn-floating btn-fb btn-sm font-smaller "><i class="fa fa-circle fa-lg"
+                  style="color: rgba(229, 85, 81)" aria-hidden="true"></i></a>
+              <label>Active</label>
+            </li>
+            <li class="list-group-item bg-gray border-0">
+              <a class="btn-floating btn-tw btn-sm font-smaller "><i class="fa fa-circle fa-lg"
+                  style="color: rgba(245, 183, 109)" aria-hidden="true"></i></a>
+              <label>In Progress</label>
+            </li>
+            <li class="list-group-item bg-gray border-0">
+              <a class="text-white btn-floating btn-li btn-sm font-smaller "><i class="fa fa-circle fa-lg"
+                  style="color: rgba(106, 188, 189)" aria-hidden="true"></i></a>
+              <label>Completed</label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-8">
+      <div class="card card-chart shadow-sm bg-gray">
+        <div class="card-body" style="padding: 15px">
+          <h5 style="color: #7e7e7e;"> Machine's Maintenance </h5>
+          <hr width="100%" class="pdb10">
+
+          <div class="d-flex justify-content-center">
+            <canvas id="bar-chart" width="1000" height="400"></canvas>
+          </div>
+          <div class="input-group pdt10">
+            <select class="custom-select border-radius" id="inputGroupSelect01" (change)="getAllMaintenanceByMachine()">
+              <option value="0" selected>Choose a Machine...</option>
+              <option *ngFor="let machine of machineList" value="{{machine.id}}">{{machine.name}}
+                ({{machine.serialNumber}})</option>
+            </select>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row pdt10">
+    <div class="col-12">
+      <div class="card card-chart shadow-sm bg-gray">
+        <div class="card-body" style="padding: 15px">
+          <h5 style="color: #7e7e7e;"> Andamento Manutenzioni Anno {{this.year}} / ({{this.year + 1}})</h5>
+          <hr width="100%" class="pdb10">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex justify-content-center">
+                <canvas id="line-chart" width="800" height="400"></canvas>
+              </div>
+            </div>
+            <div class="col-3 padding-top-lg">
+              <ul class="list-group pdt10" style="padding-bottom: 0;">
+                <li class="list-group-item bg-gray border-0">
+                  <a class="text-white btn-floating btn-fb btn-sm font-smaller "><i class="fa fa-circle fa-lg"
+                      style="color: rgba(229, 85, 81)" aria-hidden="true"></i></a>
+                  <label>Ordinary</label>
+                </li>
+                <li class="list-group-item bg-gray border-0">
+                  <a class="btn-floating btn-tw btn-sm font-smaller "><i class="fa fa-circle fa-lg"
+                      style="color: rgba(245, 183, 109)" aria-hidden="true"></i></a>
+                  <label>Extraordinary</label>
+                </li>
+                <hr>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 
 <div class="container">
   <div class="row">
     <div class="col">
@@ -12,10 +106,11 @@
               <h6>Manutenzioni in corso: {{userMaintenanceListInProgress.length}}</h6>
               <h6>Manutenzioni completate: {{userMaintenanceListCompleted.length}}</h6>
 
-              <button type = "submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">Via alla Lista</button>
+              <button type="submit" class="btn btn-primary" routerLink="/home/list-user-maintenance">Via alla
+                Lista</button>
             </div>
             <div class="col">
-              <div style="width: 200px;">
+              <div style="width: 500px;">
                 <canvas id="myPieChart" width="30" height="30"></canvas>
               </div>
 
@@ -31,8 +126,9 @@
           <h2>Macchinari</h2>
           <div class="input-group">
             <select class="custom-select" id="inputGroupSelect01" (change)="getAllMaintenanceByMachine()">
-              <option value = "0" selected>Choose...</option>
-              <option *ngFor="let machine of machineList" value = "{{machine.id}}">{{machine.name}} ({{machine.serialNumber}})</option>
+              <option value="0" selected>Choose...</option>
+              <option *ngFor="let machine of machineList" value="{{machine.id}}">{{machine.name}}
+                ({{machine.serialNumber}})</option>
             </select>
           </div>
           <div>
@@ -53,4 +149,4 @@
     </div>
   </div>
 </div>
-
+-->

@@ -38,6 +38,7 @@ import { BodyChatComponent } from './components/home/children/chat/body-chat/bod
 import { ItemUserComponent } from './components/home/children/chat/item-user/item-user.component';
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
 import { CarouselComponent } from './components/home/children/maintenance/carousel/carousel.component';
+import { ModalComponent } from './components/home/children/maintenance/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { CarouselComponent } from './components/home/children/maintenance/carous
     ItemUserComponent,
     DetailsMaintenanceComponent,
     CarouselComponent,
+    ModalComponent,
 
   ],
   imports: [

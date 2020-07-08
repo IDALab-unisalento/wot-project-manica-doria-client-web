@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
-import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
-import {Router} from '@angular/router';
-import {Maintenance} from '../../../../models/maintenance';
-import {Machine} from '../../../../models/machine';
-import {MachineService} from '../../../../services/machine.service';
-import {MaintenanceService} from '../../../../services/maintenance.service';
-import {UserMaintenance} from '../../../../models/user-maintenance';
+import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
+import { Router } from '@angular/router';
+import { Maintenance } from '../../../../models/maintenance';
+import { Machine } from '../../../../models/machine';
+import { MachineService } from '../../../../services/machine.service';
+import { MaintenanceService } from '../../../../services/maintenance.service';
+import { UserMaintenance } from '../../../../models/user-maintenance';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
 
@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit {
   year: number;
 
   constructor(private userMaintenanceService: UserMaintenanceService,
-              private machineService: MachineService,
-              private maintenanceService: MaintenanceService,
-              private router: Router) { }
+    private machineService: MachineService,
+    private maintenanceService: MaintenanceService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.year = new Date().getFullYear();
@@ -92,21 +92,18 @@ export class DashboardComponent implements OnInit {
         datasets: [
           {
             label: 'Tipo Manutenzione',
-            backgroundColor: ['#3e95cd', '#8e5ea2'],
+            backgroundColor: ['rgba(229, 85, 81)', 'rgba(245, 183, 109)'],
             data: [],
           }
         ]
       },
       options: {
-        legend: {display: true},
-        title: {
-          display: true,
-          text: 'Numero Manutenzioni Ordianrie/Straordinarie'
-        },
+        legend: { display: false },
         scales: {
           yAxes: [{
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              line: false
             }
           }]
         }
@@ -118,31 +115,27 @@ export class DashboardComponent implements OnInit {
     this.myPieChart = new Chart('myPieChart', {
       type: 'doughnut',
       data: {
-        labels: ['Attive', 'In Corso', 'Completate'],
+        labels: ['Active', 'In Progress', 'Completed'],
+        show: true,
         datasets: [{
-          label: 'Numero Manutenzioni',
+          label: '# Status Maintenance',
           data: [],
           backgroundColor: [
-            'rgba(255, 99, 132)',
-            'rgba(54, 162, 235)',
-            'rgba(255, 206, 86)',
+            'rgba(229, 85, 81)',
+            'rgba(245, 183, 109)',
+            'rgba(106, 188, 189)',
           ],
-          /*borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-          ],*/
+
           borderWidth: [1, 1, 1]
         }],
       },
       options: {
+        legend: {
+          display: false
+        },
         responsive: true,
         maintainAspectRatio: true,
-        title: {
-          display: true,
-          text: 'Numero Manutenzioni'
-        }
-      }
+      },
     });
   }
 
@@ -363,17 +356,16 @@ export class DashboardComponent implements OnInit {
     this.lineChart = new Chart('line-chart', {
       type: 'line',
       options: {
-        title: {
-          display: true,
-          text: 'Andamento Manutenzioni Anno ' + this.year + '/' + (this.year + 1),
-        },
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true
             }
           }]
-        }
+        },
+        legend: {
+          display: false
+        },
       }
     });
   }
@@ -383,7 +375,7 @@ export class DashboardComponent implements OnInit {
     this.lineChart.config.data.labels = [];
 
     const labels = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settmbre', 'Ottobre', 'Novenmbre', 'Dicembre'];
-    const colors = ['#3e95cd', '#8e5ea2'];
+    const colors = ['rgba(229, 85, 81)', 'rgba(245, 183, 109)'];
     let label: string;
 
     this.lineChart.config.data.labels = labels;
