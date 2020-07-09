@@ -56,3 +56,14 @@
         background-color: #379392;
         color: whitesmoke;
     }
+
+.is-invalid {
+  color: #c00000;
+}
+
+.invalid-message {
+  color: #c00000;
+  text-shadow: black;
+  font-size: 0.75rem;
+  padding: 5px 0
+}

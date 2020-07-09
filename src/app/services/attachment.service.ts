@@ -19,6 +19,7 @@ export class AttachmentService {
   private getAllAttachmentUrl = ApiVariables.apiUrlAttachment + '/getAll';
   private getAttachmentByIdUrl = ApiVariables.apiUrlAttachment + '/getById/';
   private saveAttachmentUrl = ApiVariables.apiUrlAttachment + '/save';
+  private saveVideoUrl = ApiVariables.apiUrlAttachment + '/saveVideo/';
   private deleteAttachmentUrl = ApiVariables.apiUrlAttachment + '/delete/';
   private uploadAttachmentUrl = ApiVariables.apiUrlAttachment + '/upload/';
   private getFileAttachmentUrl = ApiVariables.apiUrlAttachment + '/getFile/';
@@ -39,6 +40,12 @@ export class AttachmentService {
 
   saveAttachment(attachment: Attachment): Observable<Attachment> {
     return this.http.post<Attachment>(this.saveAttachmentUrl, attachment, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  saveVideo(attachment: Attachment, id_steo: number): Observable<Attachment> {
+    return this.http.post<Attachment>(this.saveVideoUrl + id_steo, attachment, httpOptions).pipe(
       catchError(this.handleError)
     );
   }

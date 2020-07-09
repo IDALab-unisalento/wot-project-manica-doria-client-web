@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   myPieChart: any;
   machineChart: any;
   lineChart: any;
+  maintenanceToSend: Maintenance[];
   userMaintenanceListStarted: UserMaintenance[] = [];
   userMaintenanceListInProgress: UserMaintenance[] = [];
   userMaintenanceListCompleted: UserMaintenance[] = [];
@@ -37,6 +38,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.year = new Date().getFullYear();
     this.createPieChart();
+    this.getAllMaintenanceToSend();
     this.getAllUserMaintenanceByStatusStarted();
     this.getAllUserMaintenanceByStatusInProgress();
     this.getAllUserMaintenanceByStatusCompleted();
@@ -115,18 +117,19 @@ export class DashboardComponent implements OnInit {
     this.myPieChart = new Chart('myPieChart', {
       type: 'doughnut',
       data: {
-        labels: ['Active', 'In Progress', 'Completed'],
+        labels: ['To Send', 'Active', 'In Progress', 'Completed'],
         show: true,
         datasets: [{
           label: '# Status Maintenance',
           data: [],
           backgroundColor: [
+            'rgba(128, 128, 128)',
             'rgba(229, 85, 81)',
             'rgba(245, 183, 109)',
             'rgba(106, 188, 189)',
           ],
 
-          borderWidth: [1, 1, 1]
+          borderWidth: [1, 1, 1, 1]
         }],
       },
       options: {
@@ -138,6 +141,14 @@ export class DashboardComponent implements OnInit {
       },
     });
   }
+
+  getAllMaintenanceToSend() {
+    this.maintenanceService.getAllByStatus('to-send').subscribe(data => {
+      this.maintenanceToSend = data;
+      this.addData(this.myPieChart, this.maintenanceToSend.length);
+    });
+  }
+
 
   getAllUserMaintenanceByStatusStarted() {
     this.userMaintenanceService.getAllUMByStatus('started').subscribe(data => {
@@ -280,7 +291,7 @@ export class DashboardComponent implements OnInit {
             ord12.push(this.userMaintenance[i]);
           }
         }
-        if (this.userMaintenance[i].maintenance.type === 'Straordianaria') {
+        if (this.userMaintenance[i].maintenance.type === 'Straordinaria') {
           if (this.userMaintenance[i].date.includes(this.year + '-01')) {
             stra1.push(this.userMaintenance[i]);
           }

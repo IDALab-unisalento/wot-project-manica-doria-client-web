@@ -3,12 +3,13 @@
         <div *ngFor="let pic of pics; let id = index" class="carousel-item" [class.active]="id === 0">
             <img *ngIf="pic.type == 'image'" [src]="pic.encodedFile" alt="Image Download Error" class="d-block"
                 style="max-height: 500px; max-width: 500px;">
-
+<!--
             <iframe id="myIframe" src="" *ngIf="pic.type == 'video'" style="width: 500px; height: 500px;"
                 (focus)="iframeDidLoad(pic.path)">
             </iframe>
 
             <h1 class="text-light">{{id}}</h1>
+-->
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

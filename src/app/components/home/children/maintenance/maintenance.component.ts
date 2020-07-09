@@ -1,4 +1,3 @@
-import { Beacon } from './../../../../models/beacon';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Machine } from '../../../../models/machine';
 import { Zone } from '../../../../models/zone';
@@ -11,8 +10,9 @@ import { Maintenance } from '../../../../models/maintenance';
 import { Router } from '@angular/router';
 import { Attachment } from '../../../../models/attachment';
 import { AttachmentService } from '../../../../services/attachment.service';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import * as moment from 'moment';
+import {split} from 'ts-node';
 
 @Component({
   selector: 'app-maintenance',
@@ -26,11 +26,11 @@ export class MaintenanceComponent implements OnInit {
   stepList: Step[] = [];
   zone: Zone;
   maintenanceList: Maintenance[];
-  //maintenance: Maintenance ;
+  newMaintenance = { } as Maintenance;
   step: Step;
   attachmentList: Attachment[] = [];
   attachment: Attachment;
-  video: string;
+  //video: string;
   isCreate = false;
 
 
@@ -95,7 +95,7 @@ export class MaintenanceComponent implements OnInit {
         id: Number((document.getElementById('inputGroupSelect01') as HTMLInputElement).value),
       }
     };
-    this.maintenanceService.saveMaintenance(maintenance).subscribe(data => {
+    this.maintenanceService.saveMaintenance(this.newMaintenance).subscribe(data => {
       console.log('Manutenzione creata', data);
       //this.maintenance = data;
       this.isCreate = false;
@@ -119,12 +119,13 @@ export class MaintenanceComponent implements OnInit {
       this.stepList = data;
       console.log('Steps scaricati dal DB', this.stepList);
       for (let i = 0; i < this.stepList.length; i++) {
+        console.log(this.stepList[i].id);
         this.attachmentService.getAttachment(this.stepList[i].id).subscribe(data2 => {
           this.attachmentList = data2;
-          console.log('Attachment scaricati dal DB', this.attachmentList);
+          console.log('Attachment scaricati dal DB dello step ', this.stepList[i].id, this.attachmentList);
           // aggiorniamo la lista degli step scaricati dal db con gli attachment scaricati dal db relativo ad ogni step
           this.stepList[i].attachmentList = this.attachmentList;
-          this.attachmentList = [];
+          this.attachmentList = []; // la svuotiamo per riutilizzarla
         });
       }
     });
@@ -137,7 +138,7 @@ export class MaintenanceComponent implements OnInit {
     if (maintenance !== undefined) {
       this.zoneService.getAllZoneByMachineId(maintenance.machine.id).subscribe(data => {
         this.zoneList = data;
-        console.log('Zone associate al macchinario', this.zoneList);
+        //console.log('Zone associate al macchinario', this.zoneList);
       });
     }
   }
@@ -146,66 +147,15 @@ export class MaintenanceComponent implements OnInit {
   getZoneById() {
     const zone = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
     this.zoneService.getZoneById(zone).subscribe(data => {
-      console.log('Zona da associare allo step', data);
       this.zone = data;
       // aggiunge lo step
       this.addStep();
     });
   }
 
-  // aggiungiamo lo step all'array degli step che poi andremo a salvare definitivamente nel db premendo il tasto salva e completa
-  addStep() {
-    if (this.video != null) {
-      console.log(this.video);
-      const videoY = this.video.split('watch?v=').join('embed/');
-      this.sanitizedImageData = (this.sanitizer.bypassSecurityTrustUrl(videoY));
-      console.log(videoY);
-      this.attachment = {
-        path: videoY,
-        type: 'video',
-      };
-      this.attachmentList.push(this.attachment);
-    }
-    this.step = {
-      name: this.name.nativeElement.value,
-      description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
-      //duration: (document.getElementById('appt') as HTMLInputElement).value,
-      zone: this.zone,
-      maintenance: {
-        id: Number((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value),
-      },
-      attachmentList: this.attachmentList,
-    };
-    console.log('STEEEEEP', this.step);
-    this.svuotaForm();
-    this.stepList.push(this.step);
-  }
-
-  svuotaForm() {
-    this.attachmentList = [];
-    this.name.nativeElement.value = null;
-    (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value = null;
-    (document.getElementById('inputImage') as HTMLInputElement).value = null;
-
-
-    this.video = null;
-  }
-
-  // cancelliamo gli step dall'array (se era già presente nel db lo elimina dal db)
-  deleteStep(id: number, myindex: number) {
-    if (id !== undefined) {
-      this.stepService.deleteStep(id).subscribe(data => {
-        console.log(data);
-        this.stepList.splice(myindex, 1);
-      });
-    } else {
-      this.stepList.splice(myindex, 1);
-    }
-  }
-
   // salviamo le foto prese dal pc nell'array degli attachment per poi poterle salvare nel db
   onFileSelected(event) {
-    console.log('Event: ', event);
+    //console.log('Event: ', event);
     this.attachmentList = [];
     this.printImageSelected(event.target.files);
     for (let i = 0; i < event.target.files.length; i++) {
@@ -226,8 +176,62 @@ export class MaintenanceComponent implements OnInit {
         this.attachmentList.push(this.attachment);
       };
     }
-    console.log(this.attachmentList);
+    console.log('AttachmentList dopo il select file', this.attachmentList);
   }
+
+  // aggiungiamo lo step all'array degli step che poi andremo a salvare definitivamente nel db premendo il tasto salva e completa
+  addStep() {
+    /*if (this.video != null) {
+      console.log(this.video);
+      //const videoY = this.video.split('watch?v=').join('embed/');
+      //this.sanitizedImageData = (this.sanitizer.bypassSecurityTrustUrl(videoY));
+      //console.log(videoY);
+      console.log('Prima', this.attachment);
+      this.attachment = {
+        path: this.video,
+        type: 'video',
+      };
+      console.log('Dopo', this.attachment);
+      this.attachmentList.push(this.attachment);
+      console.log('Attachment dopo il video', this.attachmentList);
+    }*/
+    this.step = {
+      name: this.name.nativeElement.value,
+      description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
+      duration: this.getStepTime(),
+      zone: this.zone,
+      maintenance: {
+        id: Number((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value),
+      },
+      attachmentList: this.attachmentList,
+    };
+    console.log('Step Aggiunto', this.step);
+    this.svuotaForm();
+    this.stepList.push(this.step);
+    console.log('ALL Step After add', this.stepList);
+  }
+
+  svuotaForm() {
+    this.attachmentList = [];
+    this.name.nativeElement.value = null;
+    (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value = null;
+    (document.getElementById('inputImage') as HTMLInputElement).value = null;
+    //this.video = null;
+  }
+
+  // cancelliamo gli step dall'array (se era già presente nel db lo elimina dal db)
+  deleteStep(id: number, myindex: number) {
+    if (id !== undefined) {
+      this.stepService.deleteStep(id).subscribe(data => {
+        console.log(data);
+        this.stepList.splice(myindex, 1);
+      });
+    } else {
+      this.stepList.splice(myindex, 1);
+    }
+  }
+
+
 
   // salviamo gli steps nel db
   saveStep() {
@@ -236,7 +240,7 @@ export class MaintenanceComponent implements OnInit {
     this.stepList[0].status = 'started';
     for (let i = 0; i < this.stepList.length; i++) {
       this.stepList[i].maintenance = main;
-      console.log(this.stepList[i]);
+      console.log('Step List:', this.stepList[i]);
       this.stepList[i].numbered = i + 1;
       if (i !== 0) {
         this.stepList[i].status = 'to-do';
@@ -251,7 +255,7 @@ export class MaintenanceComponent implements OnInit {
               });
             }
             if (this.stepList[i].attachmentList[j].type === 'video') {
-              this.attachmentService.saveAttachment(this.stepList[i].attachmentList[j]).subscribe(data3 => {
+              this.attachmentService.saveVideo(this.stepList[i].attachmentList[j], data.id).subscribe(data3 => {
                 console.log(data3);
               });
             }
@@ -260,6 +264,7 @@ export class MaintenanceComponent implements OnInit {
         this.router.navigateByUrl('/home/list-maintenance');
       });
     }
+    console.log('SAVE', this.stepList);
   }
 
   iframeDidLoad(path: string) {
@@ -267,9 +272,12 @@ export class MaintenanceComponent implements OnInit {
     //(document.getElementById('myIframe') as HTMLInputElement).setAttribute('src', path);
   }
 
-  print() {
+  getStepTime(): number {
     const time = (document.getElementById('appt') as HTMLInputElement).value;
-    console.log(time);
+    const t = time.split(':');
+    const min = Number(t[1]) * 60000;
+    const hours = Number(t[0]) * 3600000;
+    return min + hours;
   }
 
   printImageSelected(images: any) {

@@ -1,4 +1,4 @@
-<div class="padding-md">
+<div class="padding-top-md">
   <div class="card">
     <div class="card-header">
       <h5> Assign maintenance to operator</h5>
@@ -39,7 +39,7 @@
               <div class="col padding-bottom-sm">
                 <div class="input-group" style="margin-right: 10px">
                   <select class="custom-select border-right-0" style="border-radius: 10px 0 0 10px;"
-                    id="inputGroupSelect01">
+                    id="inputGroupSelect02">
                     <option value="0" selected>Choose a Operator...</option>
                     <option *ngFor="let user of userList" [hidden]="user.role !== 'operator'" value="{{user.id}}">
                       {{user.name | titlecase}}
@@ -64,6 +64,18 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="pdt10">
+  <div class="card">
+    <div class="card-header">
+      <h5> List Maintenance</h5>
+    </div>
+
+    <div class="card-body">
+      <app-list-user-maintenance></app-list-user-maintenance>
     </div>
   </div>
 </div>
