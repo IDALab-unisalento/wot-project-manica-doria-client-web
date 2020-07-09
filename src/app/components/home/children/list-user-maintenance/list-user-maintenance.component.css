@@ -1,3 +1,9 @@
 .border-color {
     border-left: 2.5px solid #379392;
 }
+
+.btn-teal {
+    background-color: #379392;
+    color: whitesmoke;
+    border-radius: 5rem;
+}

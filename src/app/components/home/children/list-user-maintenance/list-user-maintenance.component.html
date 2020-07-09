@@ -1,12 +1,18 @@
 <div class="w-100 d-flex justify-content-center">
   <div class="btn-group" role="group" aria-label="Basic example">
-    <button (click)="getAllUserMaintenanceByStatus('started')" type="button" class="btn btn-secondary">Attive</button>
-    <button (click)="getAllUserMaintenanceByStatus('in-progress')" type="button" class="btn btn-secondary">In
-      Corso</button>
-    <button (click)="getAllUserMaintenanceByStatus('completed')" type="button"
-      class="btn btn-secondary">Completate</button>
+    <button (click)="getAllUserMaintenanceByStatus('forwarded')" type="button" class="btn btn-teal">
+      <i class="fa fa-share pdx10" aria-hidden="true"></i>
+      Forwarded</button>
+    <button (click)="getAllUserMaintenanceByStatus('in-progress')" type="button" class="btn btn-teal">
+      <i class="fa fa-cog fa-spin pdx10" aria-hidden="true"></i>
+      In Progress</button>
+    <button (click)="getAllUserMaintenanceByStatus('completed')" type="button" class="btn btn-teal">
+      <i class="fa fa-check-circle-o pdx10" aria-hidden="true"></i>
+      Completed</button>
   </div>
 </div>
+
+
 
 <h4 style="color: #7e7e7e;"> Maintenance List:
 </h4>
