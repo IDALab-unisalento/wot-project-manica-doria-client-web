@@ -1,62 +1,99 @@
-<h2>Dettagli Manutenzione</h2>
-
-<h3>{{userMaintenance.maintenance?.name}} ({{userMaintenance.maintenance?.type}})</h3>
-
-<div *ngIf="userMaintenance.status == 'started'">
-  <h3>Lista Step Started</h3>
-  <div class="card" style="width: 46rem;">
-    <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
-      <li class="list-group-item">
-        <b>Nome: </b>{{step.name}}
-        <br>
-        <b>Descrizione: </b>{{step.description}}
-        <br>
-        <b>Durata prevista: </b>{{step.estimateDuration}}
-        <br>
-        <b>Durata effettiva: </b>{{step.duration}}
-      </li>
-    </ul>
-  </div>
+<div class="container-12 padding-0">
+  <h4 style="color: #7e7e7e;"> Maintenance Details:
+    <span class="h6" style="color: #7e7e7e;"> {{userMaintenance.maintenance?.name}}
+    </span>
+  </h4>
+  <hr width="100%" class="pdb10">
 </div>
 
-<div *ngIf="userMaintenance.status == 'in-progress'">
-  <h3>Lista Step In progress</h3>
-  <div class="card" style="width: 46rem;">
-    <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
-      <li class="list-group-item">
-        <i *ngIf="step.status == 'completed'" class="fa fa-check" aria-hidden="true"></i> <i *ngIf="step.status == 'started'" class="fa fa-circle-o" aria-hidden="true"></i> <i *ngIf="step.status == 'to-do'" class="fa fa-times" aria-hidden="true"></i> <b> Nome: </b>{{step.name}}
-        <br>
-        <b>Descrizione: </b>{{step.description}}
-        <br>
-        <b>Durata prevista: </b>{{step.estimateDuration}}
-      </li>
-    </ul>
+<div class="card">
+  <div class="card-header">
+    <h3>List Steps {{userMaintenance.status | titlecase}}</h3>
+  </div>
+  <div class="card-body">
+    <div *ngIf="userMaintenance.status == 'started'">
+
+      <ul class="list-group list-group-flush pdt10" style="padding-bottom: 0;"
+        *ngFor="let step of stepList, let myindex = index">
+        <li class="list-group-item border-color">
+          <div class="row pdy10">
+            <b>Nome: </b>
+            <p>{{step.name}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Description: </b>
+            <p>{{step.description}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Duration: </b>
+            <p>{{step.duration}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Estimate Duration: </b>
+            <p>{{step.estimateDuration}}</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+
+    <div *ngIf="userMaintenance.status == 'in-progress'">
+      <ul class="list-group list-group-flush pdt10" style="padding-bottom: 0;"
+        *ngFor="let step of stepList, let myindex = index">
+        <li class="list-group-item" [ngClass]="{
+          'border-color-success': step.status === 'completed', 
+          'border-color-warning': step.status === 'in-progress', 
+          'border-color-danger': step.status === 'to-do'}">
+          <div class="row pdy10">
+            <b>Nome: </b>
+            <p>{{step.name}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Description: </b>
+            <p>{{step.description}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Duration: </b>
+            <p>{{step.duration}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Estimate Duration: </b>
+            <p>{{step.estimateDuration}}</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+    <div *ngIf="userMaintenance.status == 'completed'">
+      <h6>Numero di Step: {{stepList?.length}}</h6>
+      <div class="d-block w-100">
+        <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
+      </div>
+
+      <ul class="list-group list-group-flush pdt10" style="padding-bottom: 0;"
+        *ngFor="let step of stepList, let myindex = index">
+        <li class="list-group-item border-color">
+          <div class="row pdy10">
+            <b>Nome: </b>
+            <p>{{step.name}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Description: </b>
+            <p>{{step.description}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Duration: </b>
+            <p>{{step.duration}}</p>
+          </div>
+          <div class="row pdy10">
+            <b>Estimate Duration: </b>
+            <p>{{step.estimateDuration}}</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
   </div>
 </div>
-
-<div *ngIf="userMaintenance.status == 'completed'">
-  <h3>Lista Step Completed</h3>
-
-  <h6>Numero di Step: {{stepList?.length}}</h6>
-  <div style="width: 500px">
-    <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
-  </div>
-
-
-  <div class="card" style="width: 46rem;">
-    <ul class="list-group" *ngFor="let step of stepList, let myindex = index">
-      <li class="list-group-item">
-        <b>Nome: </b>{{step.name}}
-        <br>
-        <b>Descrizione: </b>{{step.description}}
-        <br>
-        <b>Durata prevista: </b>{{step.estimateDuration}}
-        <br>
-        <b>Durata effettiva: </b>{{step.duration}}
-      </li>
-    </ul>
-  </div>
-</div>
-
-
-

@@ -1,27 +1,30 @@
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option1" autocomplete="off"
-      (click)="getAllUserMaintenanceByStatus('started')"> Attive
-  </label>
-  <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="option2" autocomplete="off"
-      (click)="getAllUserMaintenanceByStatus('in-progress')" checked> In Corso
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"
-      (click)="getAllUserMaintenanceByStatus('completed')"> Completate
-  </label>
+<div class="w-100 d-flex justify-content-center">
+  <div class="btn-group" role="group" aria-label="Basic example">
+    <button (click)="getAllUserMaintenanceByStatus('started')" type="button" class="btn btn-secondary">Attive</button>
+    <button (click)="getAllUserMaintenanceByStatus('in-progress')" type="button" class="btn btn-secondary">In
+      Corso</button>
+    <button (click)="getAllUserMaintenanceByStatus('completed')" type="button"
+      class="btn btn-secondary">Completate</button>
+  </div>
 </div>
 
-<h3>Lista Manutenzioni</h3>
-<div class="card" style="width: 46rem;">
-  <ul class="list-group" *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
-    <li class="list-group-item, btn bg-transparent" (click)="goToDetailsMaintenance(userMaintenance.id)">
-      <b>Nome: </b>{{userMaintenance.maintenance.name}}
-      <br>
-      <b>Tipo: </b>{{userMaintenance.maintenance.type}}
-      <br>
-      <b>Operatore: </b>{{userMaintenance.user.name}}
-    </li>
-  </ul>
-</div>
+<h4 style="color: #7e7e7e;"> Maintenance List:
+</h4>
+<hr width="100%">
+<ul class="list-group list-group-flush border-color" style="padding-bottom: 0;"
+  *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
+  <li class="list-group-item border-color">
+    <div class="row pdy10">
+      <b>Nome: </b>
+      <p>{{userMaintenance.maintenance.name}}</p>
+    </div>
+    <div class="row pdy10">
+      <b>Type: </b>
+      <p>{{userMaintenance.maintenance.type}}</p>
+    </div>
+    <div class="row pdy10">
+      <b>Operator: </b>
+      <p>{{userMaintenance.user.name}}</p>
+    </div>
+  </li>
+</ul>

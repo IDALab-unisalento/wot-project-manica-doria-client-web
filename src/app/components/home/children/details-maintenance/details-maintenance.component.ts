@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {MaintenanceService} from '../../../../services/maintenance.service';
-import {Maintenance} from '../../../../models/maintenance';
-import {StepService} from '../../../../services/step.service';
-import {Step} from '../../../../models/step';
-import {UserMaintenance} from '../../../../models/user-maintenance';
-import {UserMaintenanceService} from '../../../../services/user-maintenance.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MaintenanceService } from '../../../../services/maintenance.service';
+import { Maintenance } from '../../../../models/maintenance';
+import { StepService } from '../../../../services/step.service';
+import { Step } from '../../../../models/step';
+import { UserMaintenance } from '../../../../models/user-maintenance';
+import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
 import Chart from 'chart.js';
 
 @Component({
   selector: 'app-details-maintenance',
   templateUrl: './details-maintenance.component.html',
-  styleUrls: ['./details-maintenance.component.css']
+  styleUrls: ['./details-maintenance.component.scss']
 })
 export class DetailsMaintenanceComponent implements OnInit {
 
-  userMaintenance: UserMaintenance = { } as UserMaintenance;
+  userMaintenance: UserMaintenance = {} as UserMaintenance;
   stepList: Step[];
   stepChart: any;
 
@@ -60,11 +60,11 @@ export class DetailsMaintenanceComponent implements OnInit {
         datasets: [
           {
             label: 'Durata Stimata',
-            backgroundColor: '#3e95cd',
+            backgroundColor: 'rgba(229, 85, 81)',
             data: stepEstimateDuration
           }, {
             label: 'Durata Effettiva',
-            backgroundColor: '#8e5ea2',
+            backgroundColor: 'rgba(245, 183, 109)',
             data: stepDuration
           }
         ]

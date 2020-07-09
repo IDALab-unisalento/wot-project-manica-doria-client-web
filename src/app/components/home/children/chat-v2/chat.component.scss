@@ -1,0 +1,55 @@
+@media(min-width: 576px){
+    .h6 {
+        font-size: small;
+    }
+}
+
+.card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    height: 700px;
+    padding: 1.25rem;
+}
+
+.card-footer {
+    padding: 0;
+    background-color: transparent;
+    border-top: 0;
+}
+
+.small-text {
+    font-size: x-small;
+    color: #aeaeae;
+    overflow-y: hidden;
+}
+
+.item-chat {
+    max-height: 55px; 
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.card-body h6 {
+    margin: 0;
+}
+
+.border-radius {
+    border-radius: 20px;
+}
+
+.border-color-user {
+    color: #fafafa;
+    border-radius: 20px;
+    background-color: #e55551;
+}
+
+.border-color-other {
+    color: #fafafa;
+    border-radius: 20px;
+    background-color: #6abcbd;
+}
