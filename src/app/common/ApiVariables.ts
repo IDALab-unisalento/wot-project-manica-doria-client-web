@@ -1,5 +1,5 @@
 export class ApiVariables {
-    public static localhost = '192.168.1.5:8080';
+    public static localhost = '172.20.10.5:8080';
 
     public static apiUrlUser = 'http://' + ApiVariables.localhost + '/api/user';
     public static apiUrlAttachment = 'http://' + ApiVariables.localhost + '/api/attachment';

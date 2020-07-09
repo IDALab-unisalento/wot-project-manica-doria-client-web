@@ -44,6 +44,9 @@ export class MaintenanceComponent implements OnInit {
   @ViewChild('name') name: any;
   //@ViewChild('video') video: any;
   sanitizedImageData: any;
+  saveMaintenanceError = false;
+  addStepError = false;
+  selectedMaintenanceError = false;
 
   constructor(
     private machineService: MachineService,
@@ -95,12 +98,17 @@ export class MaintenanceComponent implements OnInit {
         id: Number((document.getElementById('inputGroupSelect01') as HTMLInputElement).value),
       }
     };
-    this.maintenanceService.saveMaintenance(this.newMaintenance).subscribe(data => {
-      console.log('Manutenzione creata', data);
-      //this.maintenance = data;
-      this.isCreate = false;
-      this.getAllMaintenanceToSend();
-    });
+    if (this.name.nativeElement.value !== '' && (document.getElementById('textAreaDescriptionMaintenance') as HTMLInputElement).value !== '' &&
+       (document.getElementById('inputGroupSelect01') as HTMLInputElement).value !== '0' && (document.getElementById('inputGroupSelect04') as HTMLInputElement).value !== '0') {
+    this.maintenanceService.saveMaintenance(maintenance).subscribe(data => {
+        console.log('Manutenzione creata', data);
+        this.isCreate = false;
+        this.getAllMaintenanceToSend();
+        this.saveMaintenanceError = false;
+      });
+    } else {
+      this.saveMaintenanceError = true;
+    }
   }
 
   // cancelliamo la manutenzione selezionata
@@ -145,12 +153,22 @@ export class MaintenanceComponent implements OnInit {
 
   // quando premiamo su aggiungi step stiamo selezionando la zona associata e poi lanciamo la funzione che lancia aggiungi step
   getZoneById() {
-    const zone = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
-    this.zoneService.getZoneById(zone).subscribe(data => {
-      this.zone = data;
-      // aggiunge lo step
-      this.addStep();
-    });
+    if ((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value !== '0') {
+      const zone = (document.getElementById('inputGroupSelect02') as HTMLInputElement).value;
+      console.log(zone);
+      if ((document.getElementById('inputGroupSelect02') as HTMLInputElement).value !== '0') {
+        this.zoneService.getZoneById(zone).subscribe(data => {
+          this.zone = data;
+          // aggiunge lo step
+          this.addStep();
+        });
+      } else {
+        this.addStepError = true;
+      }
+      this.selectedMaintenanceError = false;
+    } else {
+      this.selectedMaintenanceError = true;
+    }
   }
 
   // salviamo le foto prese dal pc nell'array degli attachment per poi poterle salvare nel db
@@ -205,10 +223,16 @@ export class MaintenanceComponent implements OnInit {
       },
       attachmentList: this.attachmentList,
     };
-    console.log('Step Aggiunto', this.step);
-    this.svuotaForm();
-    this.stepList.push(this.step);
-    console.log('ALL Step After add', this.stepList);
+    if (this.name.nativeElement.value !== '' && (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value !== ''
+    && (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value !== '0') {
+      console.log('Step Aggiunto', this.step);
+      this.svuotaForm();
+      this.stepList.push(this.step);
+      console.log('ALL Step After add', this.stepList);
+      this.addStepError = false;
+    } else {
+      this.addStepError = true;
+    }
   }
 
   svuotaForm() {
@@ -237,7 +261,7 @@ export class MaintenanceComponent implements OnInit {
   saveStep() {
     const maintenance = (document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value;
     const main = { id: Number(maintenance) } as Maintenance;
-    this.stepList[0].status = 'started';
+    this.stepList[0].status = 'in-progress';
     for (let i = 0; i < this.stepList.length; i++) {
       this.stepList[i].maintenance = main;
       console.log('Step List:', this.stepList[i]);
@@ -291,5 +315,4 @@ export class MaintenanceComponent implements OnInit {
     this.attachmentList = step.attachmentList;
     this.selectedStep = step;
   }
-
 }

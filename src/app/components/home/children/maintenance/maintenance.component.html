@@ -10,6 +10,14 @@
         <div class="col-5">
 
           <div class="input-group">
+            <div class="alert alert-danger" role="alert" [hidden]="!selectedMaintenanceError">
+              Error Maintenance. <br>Please select a maintenance or create one.
+            </div>
+
+            <div class="alert alert-danger" role="alert" [hidden]="!addStepError">
+              Error to add step. <br>Please insert all input to add a step.
+            </div>
+
             <select class="custom-select border-right-0" style="border-radius: 10px 0 0 10px;"
               id="inputGroupSelectMaintenance" (change)="getAllStepByMaintenance(); getAllZoneByMachine()">
               <option value="0" selected>Choose a Maintenance...</option>
@@ -27,34 +35,28 @@
             </a>
           </div>
 
-          <form class="padding-top-sm needs-validation" novalidate *ngIf="isCreate">
-            <div class="form-group">
-              <input placeholder="Maintenance name" type="text" class="form-control" required
-              minlength="5" maxlength="60">
-              <div class="invalid-feedback">
-                Please insert a valid name
-              </div>
+          <form class="padding-top-sm" *ngIf="isCreate">
+            <div class="alert alert-danger" role="alert" [hidden]="!saveMaintenanceError">
+              Error to save maintenance. <br>Please insert all input to create a maintenance.
+            </div>
+
+            <div class="form-group" >
+              <input placeholder="Maintenance name" type="text" class="form-control" #name name="name" required>
             </div>
 
             <select class="custom-select" id="inputGroupSelect04" required>
-              <option value="" selected>Choose a Type..</option>
+              <option value="0" selected disabled="disabled">Choose a Type...</option>
               <option value="Ordinary">Ordinary</option>
               <option value="Extraordinary">Extraordinary</option>
             </select>
 
             <div class="form-group pdt10">
-              <textarea placeholder="Description" class="form-control" id="textAreaDescriptionMaintenance"
-                rows="3" required
-                        minlength="5" maxlength="60"></textarea>
-              <div class="invalid-feedback">
-                Please insert a valid description
-              </div>
+              <textarea placeholder="Description" class="form-control" id="textAreaDescriptionMaintenance" rows="3"></textarea>
             </div>
 
-
             <div class="input-group">
-              <select class="custom-select" id="inputGroupSelect01" required>
-                <option value="" selected>Choose a Machine...</option>
+              <select class="custom-select" id="inputGroupSelect01">
+                <option value="0" selected disabled="disabled">Choose a Machine...</option>
                 <option *ngFor="let machine of machineList" value='{{machine.id}}'>{{machine.name}}
                   ({{machine.serialNumber}})
                 </option>
@@ -62,7 +64,7 @@
             </div>
 
             <div class="d-flex justify-content-end padding-bottom-sm pdt10">
-              <button type="submit" class="btn btn-success" (click)="saveMaintenance()">Save</button>
+              <button type="submit" class="btn btn-success" [disabled]="" (click)="saveMaintenance()">Save</button>
               <button type="button" class="btn btn-danger" style=" margin-left: 10px;"
                 (click)="annulla()">Cancel</button>
             </div>
@@ -150,24 +152,3 @@
 <div class="modal fade" id="DetailsModal">
   <app-modal [attachmentList]="this.attachmentList" [stepSelected]="this.selectedStep"></app-modal>
 </div>
-
-<script>
-  // Example starter JavaScript for disabling form submissions if there are invalid fields
-  (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
-      var forms = document.getElementsByClassName('needs-validation');
-      // Loop over them and prevent submission
-      var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-          if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add('was-validated');
-        }, false);
-      });
-    }, false);
-  })();
-</script>
