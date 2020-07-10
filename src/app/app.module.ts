@@ -39,6 +39,7 @@ import { ItemUserComponent } from './components/home/children/chat/item-user/ite
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
 import { CarouselComponent } from './components/home/children/maintenance/carousel/carousel.component';
 import { ModalComponent } from './components/home/children/maintenance/modal/modal.component';
+import { TimeStepPipe } from './services/pipes/time-step.pipe';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { ModalComponent } from './components/home/children/maintenance/modal/mod
     DetailsMaintenanceComponent,
     CarouselComponent,
     ModalComponent,
+    TimeStepPipe,
 
   ],
   imports: [
@@ -86,6 +88,7 @@ import { ModalComponent } from './components/home/children/maintenance/modal/mod
     ChatService,
     DataSharingService,
     BeaconService,
+    TimeStepPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -13,13 +13,12 @@
 </div>
 
 
-
 <h4 style="color: #7e7e7e;"> Maintenance List:
 </h4>
 <hr width="100%">
 <ul class="list-group list-group-flush border-color" style="padding-bottom: 0;"
   *ngFor="let userMaintenance of userMaintenanceList, let myindex = index">
-  <li class="list-group-item border-color">
+  <li class="list-group-item border-color" (click)="goToDetailsMaintenance(userMaintenance.id)">
     <div class="row pdy10">
       <b>Nome: </b>
       <p>{{userMaintenance.maintenance.name}}</p>
@@ -34,3 +33,10 @@
     </div>
   </li>
 </ul>
+
+<ul *ngIf="userMaintenanceList.length == 0" style="padding-bottom: 0;">
+  <div class="row pdy10">
+    <p>There are no maintenance</p>
+  </div>
+</ul>
+

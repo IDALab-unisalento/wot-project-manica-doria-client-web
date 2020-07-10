@@ -11,7 +11,7 @@
     <h3>List Steps {{userMaintenance.status | titlecase}}</h3>
   </div>
   <div class="card-body">
-    <div *ngIf="userMaintenance.status == 'started'">
+    <div *ngIf="userMaintenance.status == 'forwarded'">
 
       <ul class="list-group list-group-flush pdt10" style="padding-bottom: 0;"
         *ngFor="let step of stepList, let myindex = index">
@@ -24,13 +24,13 @@
             <b>Description: </b>
             <p>{{step.description}}</p>
           </div>
-          <div class="row pdy10">
+        <!--  <div class="row pdy10">
             <b>Duration: </b>
             <p>{{step.duration}}</p>
-          </div>
+          </div> -->
           <div class="row pdy10">
             <b>Estimate Duration: </b>
-            <p>{{step.estimateDuration}}</p>
+            <p>{{step.estimateDuration | timeStep}} hours</p>
           </div>
         </li>
       </ul>
@@ -55,11 +55,11 @@
           </div>
           <div class="row pdy10">
             <b>Duration: </b>
-            <p>{{step.duration}}</p>
+            <p>{{step.duration | timeStep}} hours</p>
           </div>
           <div class="row pdy10">
             <b>Estimate Duration: </b>
-            <p>{{step.estimateDuration}}</p>
+            <p>{{step.estimateDuration | timeStep}} hours</p>
           </div>
         </li>
       </ul>
@@ -85,11 +85,11 @@
           </div>
           <div class="row pdy10">
             <b>Duration: </b>
-            <p>{{step.duration}}</p>
+            <p>{{step.duration | timeStep}} hours</p>
           </div>
           <div class="row pdy10">
             <b>Estimate Duration: </b>
-            <p>{{step.estimateDuration}}</p>
+            <p>{{step.estimateDuration | timeStep}} hours</p>
           </div>
         </li>
       </ul>

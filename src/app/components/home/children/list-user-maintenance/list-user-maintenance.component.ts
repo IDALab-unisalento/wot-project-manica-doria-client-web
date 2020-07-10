@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ListUserMaintenanceComponent implements OnInit {
 
-  userMaintenanceList: UserMaintenance[];
+  userMaintenanceList: UserMaintenance[] = [];
 
   constructor(private userMaintenanceService: UserMaintenanceService, private router: Router) { }
 

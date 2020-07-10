@@ -90,7 +90,7 @@ export class DashboardComponent implements OnInit {
     this.machineChart = new Chart('bar-chart', {
       type: 'bar',
       data: {
-        labels: ['Ordinaria', 'Straordinaria'],
+        labels: ['Ordinary', 'Extraordinary'],
         datasets: [
           {
             label: 'Tipo Manutenzione',
@@ -151,7 +151,7 @@ export class DashboardComponent implements OnInit {
 
 
   getAllUserMaintenanceByStatusStarted() {
-    this.userMaintenanceService.getAllUMByStatus('started').subscribe(data => {
+    this.userMaintenanceService.getAllUMByStatus('forwarded').subscribe(data => {
       console.log(data);
       this.userMaintenanceListStarted = data;
       this.addData(this.myPieChart, this.userMaintenanceListStarted.length);
@@ -186,10 +186,10 @@ export class DashboardComponent implements OnInit {
       const ordinaria = [];
       const straordinaria = [];
       for (let i = 0; i < this.maintenanceList.length; i++) {
-        if (this.maintenanceList[i].type === 'Ordinaria') {
+        if (this.maintenanceList[i].type === 'Ordinary') {
           ordinaria.push(this.maintenanceList[i]);
         }
-        if (this.maintenanceList[i].type === 'Straordinaria') {
+        if (this.maintenanceList[i].type === 'Extraordinary') {
           straordinaria.push(this.maintenanceList[i]);
         }
       }
@@ -253,7 +253,7 @@ export class DashboardComponent implements OnInit {
       const stra12 = [];
 
       for (let i = 0; i < this.userMaintenance.length; i++) {
-        if (this.userMaintenance[i].maintenance.type === 'Ordinaria') {
+        if (this.userMaintenance[i].maintenance.type === 'Ordinary') {
           if (this.userMaintenance[i].date.includes(this.year + '-01')) {
             ord1.push(this.userMaintenance[i]);
           }
@@ -291,7 +291,7 @@ export class DashboardComponent implements OnInit {
             ord12.push(this.userMaintenance[i]);
           }
         }
-        if (this.userMaintenance[i].maintenance.type === 'Straordinaria') {
+        if (this.userMaintenance[i].maintenance.type === 'Extraordinary') {
           if (this.userMaintenance[i].date.includes(this.year + '-01')) {
             stra1.push(this.userMaintenance[i]);
           }
@@ -393,10 +393,10 @@ export class DashboardComponent implements OnInit {
 
     for (let i = 0; i < data.length; i++) {
       if (i === 0) {
-        label = 'Ordinarie';
+        label = 'Ordinary';
       }
       if (i === 1) {
-        label = 'Straordinarie';
+        label = 'Extraordinary';
       }
       const dataSet = {
         label,

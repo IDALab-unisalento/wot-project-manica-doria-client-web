@@ -7,6 +7,7 @@ import { Step } from '../../../../models/step';
 import { UserMaintenance } from '../../../../models/user-maintenance';
 import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
 import Chart from 'chart.js';
+import {TimeStepPipe} from '../../../../services/pipes/time-step.pipe';
 
 @Component({
   selector: 'app-details-maintenance',
@@ -19,7 +20,10 @@ export class DetailsMaintenanceComponent implements OnInit {
   stepList: Step[];
   stepChart: any;
 
-  constructor(private route: ActivatedRoute, private userMaintenanceService: UserMaintenanceService, private stepService: StepService) { }
+  constructor(private route: ActivatedRoute,
+              private userMaintenanceService: UserMaintenanceService,
+              private stepService: StepService,
+              private pipeStep: TimeStepPipe) { }
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id-maintenance');
@@ -48,10 +52,12 @@ export class DetailsMaintenanceComponent implements OnInit {
     const stepDuration = [];
     const stepEstimateDuration = [];
     for (let i = 0; i < this.stepList.length; i++) {
+      const t = this.pipeStep.transform(this.stepList[i].estimateDuration);
+      console.log(t);
       numberStep.push('Step ' + (this.stepList[i].numbered).toString());
       console.log(numberStep);
-      stepDuration.push(this.stepList[i].duration);
-      stepEstimateDuration.push(this.stepList[i].estimateDuration);
+      stepDuration.push(this.pipeStep.transform(this.stepList[i].duration));
+      stepEstimateDuration.push(this.pipeStep.transform(this.stepList[i].estimateDuration));
     }
     this.stepChart = new Chart('bar-chart-grouped', {
       type: 'bar',

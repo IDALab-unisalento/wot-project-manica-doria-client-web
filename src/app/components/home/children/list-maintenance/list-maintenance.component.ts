@@ -74,7 +74,7 @@ export class ListMaintenanceComponent implements OnInit {
         id: Number(maintenance),
       },
       date: date.toISOString(),
-      status: 'in-progress',
+      status: 'forwarded',
     };
     console.log(this.userMaintenance);
     this.userMaintenanceService.saveUM(this.userMaintenance).subscribe(data => {

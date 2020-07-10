@@ -134,6 +134,7 @@ export class MaintenanceComponent implements OnInit {
           // aggiorniamo la lista degli step scaricati dal db con gli attachment scaricati dal db relativo ad ogni step
           this.stepList[i].attachmentList = this.attachmentList;
           this.attachmentList = []; // la svuotiamo per riutilizzarla
+          console.log('AAAAAAA', this.attachmentList);
         });
       }
     });
@@ -213,10 +214,11 @@ export class MaintenanceComponent implements OnInit {
       this.attachmentList.push(this.attachment);
       console.log('Attachment dopo il video', this.attachmentList);
     }*/
+    console.log('BBBBBBBBB', this.attachmentList);
     this.step = {
       name: this.name.nativeElement.value,
       description: (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value,
-      duration: this.getStepTime(),
+      estimateDuration: this.getStepTime(),
       zone: this.zone,
       maintenance: {
         id: Number((document.getElementById('inputGroupSelectMaintenance') as HTMLInputElement).value),
@@ -240,6 +242,8 @@ export class MaintenanceComponent implements OnInit {
     this.name.nativeElement.value = null;
     (document.getElementById('textAreaDescriptionStep') as HTMLInputElement).value = null;
     (document.getElementById('inputImage') as HTMLInputElement).value = null;
+    this.fileName = null;
+    (document.getElementById('appt') as HTMLInputElement).value = null;
     //this.video = null;
   }
 

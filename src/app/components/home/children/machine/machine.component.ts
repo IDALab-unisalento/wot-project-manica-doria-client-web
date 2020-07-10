@@ -103,6 +103,7 @@ export class MachineComponent implements OnInit {
     if (machine !== 'Choose a Machine...') {
       this.machineService.deleteMachine(machine).subscribe(data => {
         console.log(data);
+        this.zoneList = [];
         this.getAllMachine();
       });
     }
