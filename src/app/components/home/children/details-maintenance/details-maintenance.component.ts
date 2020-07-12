@@ -79,7 +79,14 @@ export class DetailsMaintenanceComponent implements OnInit {
         title: {
           display: true,
           text: 'Durata Step'
-        }
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        },
       }
     });
     /*this.stepChart = new Chart('bar-chart-grouped', {
