@@ -18,6 +18,14 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (matchMedia) {
+      const mq = window.matchMedia('(max-width: 768px)');
+      if (mq.matches) {
+        this._opened = false;
+      } else {
+        this._opened = true;
+      }
+    }
   }
 
   _toggleSidebar() {

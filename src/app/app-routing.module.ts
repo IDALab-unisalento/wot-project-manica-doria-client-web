@@ -10,7 +10,7 @@ import { MachineComponent } from './components/home/children/machine/machine.com
 import { BeaconComponent } from './components/home/children/beacon/beacon.component';
 import { DashboardComponent } from './components/home/children/dashboard/dashboard.component';
 import { ProfileComponent } from './components/home/children/profile/profile.component';
-import { ChatComponent } from './components/home/children/chat/chat.component';
+import { ChatComponent } from './components/home/children/chat-v2/chat.component';
 import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
 

@@ -21,9 +21,37 @@
                         </div>
                     </div>
                     <hr>
+                    <div class="row item-chat">
+                        <div class="col-3">
+                            <i class="fa fa-user-circle fa-3x"></i>
+                        </div>
+                        <div class="col-9">
+                            <div class="h6" style="margin-bottom: 0;">
+                                {{messageList[0].user.name}} {{messageList[0].user.surname}}
+                            </div>
+                            <div class="small-text">
+                                {{messageList[0].content}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row item-chat">
+                        <div class="col-3">
+                            <i class="fa fa-user-circle fa-3x"></i>
+                        </div>
+                        <div class="col-9">
+                            <div class="h6" style="margin-bottom: 0;">
+                                {{messageList[0].user.name}} {{messageList[0].user.surname}}
+                            </div>
+                            <div class="small-text">
+                                {{messageList[0].content}}
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
                 </div>
                 <div class="card-footer">
-
+                    <input type="text" class="w-100">
                 </div>
             </div>
         </div>
@@ -34,39 +62,51 @@
                     Messages
                 </div>
                 <div class="card-body">
-                    <div class="row" *ngIf="messageList[0].user.name === currentUser.name">
-                        <div class="col-6">
-                            <div class="card border-radius border-color-user">
-                                <div class="card-body" style="height: fit-content; padding: 10px;">
-                                    <h6>{{messageList[0].user.name}}</h6>
-                                    <p>{{messageList[0].content}}</p>
-                                    <div class="padd-0 card-footer d-flex justify-content-end">
-                                        <small>
-                                            {{messageList[0].date | date: 'shortTime' }}
-                                        </small>
+                    <div *ngFor="let message of messageList">
+                        <div class="row" *ngIf="message.user.name === currentUser.name">
+
+                            <div class="col-6">
+                                <div class="card border-radius border-color-user">
+                                    <div class="card-body" style="height: fit-content; padding: 10px;">
+                                        <h6>{{message.user.name}}</h6>
+                                        <p>{{message.content}}</p>
+                                        <div class="padd-0 card-footer d-flex justify-content-end">
+                                            <small>
+                                                {{messageList[0].date | date: 'shortTime' }}
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="message.user.name !== currentUser.name">
+                            <div class="col-6 offset-6">
+                                <div class="card border-radius border-color-other">
+                                    <div class="card-body " style="height: fit-content; padding: 10px;">
+                                        <h6>{{message.user.name}}</h6>
+                                        <p>{{message.content}}</p>
+                                        <div class="padd-0 card-footer d-flex justify-content-end">
+                                            <small>
+                                                {{message.date | date: 'shortTime' }}
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row" *ngIf="messageList[1].user.name !== currentUser.name">
-                        <div class="col-6 offset-6">
-                            <div class="card border-radius border-color-other">
-                                <div class="card-body " style="height: fit-content; padding: 10px;">
-                                    <h6>{{messageList[1].user.name}}</h6>
-                                    <p>{{messageList[1].content}}</p>
-                                    <div class="padd-0 card-footer d-flex justify-content-end">
-                                        <small>
-                                            {{messageList[1].date | date: 'shortTime' }}
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="card-footer">
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="text" class="w-100">
+                        </div>
+                        <div class="col1">
+                            <i class="fa fa-arrow-circle-up" aria-hidden="true"></i>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>

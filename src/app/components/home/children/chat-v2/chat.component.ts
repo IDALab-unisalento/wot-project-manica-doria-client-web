@@ -35,6 +35,16 @@ export class ChatComponent implements OnInit {
         surname: `Manica`,
         role: `Manager`
       }
+    },
+    {
+      id: 3,
+      content: `Ho un problema con la macchina 1`,
+      date: Date.now() + 2000000,
+      user: {
+        name: `Mimmo`,
+        surname: `D'Oria`,
+        role: `Operatore`
+      }
     }
   ]
 
