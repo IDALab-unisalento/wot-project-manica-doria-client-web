@@ -13,6 +13,8 @@ import { ProfileComponent } from './components/home/children/profile/profile.com
 import { ChatComponent } from './components/home/children/chat-v2/chat.component';
 import { ListUserMaintenanceComponent } from './components/home/children/list-user-maintenance/list-user-maintenance.component';
 import { DetailsMaintenanceComponent } from './components/home/children/details-maintenance/details-maintenance.component';
+import { ChatListComponent } from './components/home/children/chat-v2/childrean/chat-list/chat-list.component';
+import { ChatMessageComponent } from './components/home/children/chat-v2/childrean/chat-message/chat-message.component';
 
 
 
@@ -31,7 +33,15 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'list-maintenance', component: ListMaintenanceComponent },
       { path: 'profile', component: ProfileComponent },
-      { path: 'chat', component: ChatComponent },
+      {
+        path: 'chat',
+        component: ChatComponent,
+        children: [
+          { path: '', redirectTo: 'chat-list', pathMatch: 'full' },
+          { path: 'chat-list', component: ChatListComponent },
+          { path: 'chat-list/:id', component: ChatMessageComponent },
+        ]
+      },
       { path: 'list-user-maintenance', component: ListUserMaintenanceComponent },
       { path: 'details-maintenance/:id-maintenance', component: DetailsMaintenanceComponent },
     ],

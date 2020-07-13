@@ -10,6 +10,7 @@ import { Step } from '../models/step';
 export class DataSharingService {
 
   private user = new BehaviorSubject({} as User);
+  private maintenanceName = new BehaviorSubject({} as string);
   private step = new BehaviorSubject({} as Step);
   private maintenace = new BehaviorSubject({} as Maintenance);
 
@@ -27,8 +28,16 @@ export class DataSharingService {
     this.user.next(user);
   }
 
+  setMaintenanceChat(maintenaceName: string): void {
+    this.maintenanceName.next(maintenaceName);
+  }
+
   getCurrentUser(): BehaviorSubject<User> {
     return this.user;
+  }
+
+  getCurrentMaintenanceName(): BehaviorSubject<string> {
+    return this.maintenanceName;
   }
 
   getCurrentMaintenace(): BehaviorSubject<Maintenance> {

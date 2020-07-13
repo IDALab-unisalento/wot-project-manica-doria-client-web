@@ -40,6 +40,8 @@ import { DetailsMaintenanceComponent } from './components/home/children/details-
 import { CarouselComponent } from './components/home/children/maintenance/carousel/carousel.component';
 import { ModalComponent } from './components/home/children/maintenance/modal/modal.component';
 import { TimeStepPipe } from './services/pipes/time-step.pipe';
+import { ChatListComponent } from './components/home/children/chat-v2/childrean/chat-list/chat-list.component';
+import { ChatMessageComponent } from './components/home/children/chat-v2/childrean/chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,8 @@ import { TimeStepPipe } from './services/pipes/time-step.pipe';
     CarouselComponent,
     ModalComponent,
     TimeStepPipe,
+    ChatListComponent,
+    ChatMessageComponent,
 
   ],
   imports: [

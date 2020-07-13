@@ -1,0 +1,67 @@
+<div class="col padd-0">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-4">
+                    <div type="button" routerLink='..'><i class="fa fa-arrow-left fa-space"></i>Back</div>
+                </div>
+                <div class="col-8 d-flex justify-content-end">
+                    {{nameMaintenance}}
+                </div>
+            </div>
+        </div>
+        <div id="bodyCard" class="card-body" style="scroll-behavior: smooth; overflow: scroll;">
+            <div class="pdt10" *ngFor="let message of messageList">
+                <div class="row" *ngIf="message.user.name !== currentUser.name">
+
+                    <div class="col-6">
+                        <div class="card border-radius border-color-user">
+                            <div class="card-body" style="height: fit-content; padding: 10px;">
+                                <h6>{{message.user.name}}</h6>
+                                <p>{{message.content}}</p>
+                                <div class="padd-0 card-footer d-flex justify-content-end">
+                                    <small>
+                                        {{message.date | date:'short'}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="message.user.name === currentUser.name">
+                    <div class="col-6 offset-6">
+                        <div class="card border-radius border-color-other ">
+                            <div class="card-body " style="height: fit-content; padding: 10px;">
+                                <h6>{{message.user.name}}</h6>
+                                <p>{{message.content}}</p>
+
+                                <div class="card-footer">
+                                    <small style="float:right;">
+                                        {{message.date | date:'short'}}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="card-footer border-top">
+            <form #messageForm="ngForm" (ngSubmit)='sendMessage(messageForm.value)'>
+                <div class="row pdx10 pdb10 pdt10">
+                    <div class="col-11 justify-content-center">
+                        <textarea #textMessage='ngModel' [(ngModel)]="content" name="content" id="inputText" type="text"
+                            rows="2" style="width: 100%;"></textarea>
+                    </div>
+                    <div class="col-1" style="padding: 5px 20px 0 0;">
+                        <button type="submit" class="btn btn-block btn-outline-dark">
+                            <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
