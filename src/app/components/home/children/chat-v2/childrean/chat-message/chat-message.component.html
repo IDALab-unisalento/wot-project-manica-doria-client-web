@@ -52,8 +52,9 @@
             <form #messageForm="ngForm" (ngSubmit)='sendMessage(messageForm.value)'>
                 <div class="row pdx10 pdb10 pdt10">
                     <div class="col-11 justify-content-center">
-                        <textarea #textMessage='ngModel' [(ngModel)]="content" name="content" id="inputText" type="text"
-                            rows="2" style="width: 100%;"></textarea>
+                        <textarea (keyup.enter)="sendMessage(messageForm.value)" #textMessage='ngModel'
+                            [(ngModel)]="content" name="content" id="inputText" type="text" rows="2"
+                            style="width: 100%;"></textarea>
                     </div>
                     <div class="col-1" style="padding: 5px 20px 0 0;">
                         <button type="submit" class="btn btn-block btn-outline-dark">
