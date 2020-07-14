@@ -56,7 +56,7 @@ export class ChatListComponent implements OnInit {
           chat: chat.id
         });
         // solo due uguali altrimenti non funziona
-        if (msg.chat.id === chat.id) {
+        if (msg.chat.id == chat.id) {
           console.log('trovato')
           chat.newMessage = true;
         }

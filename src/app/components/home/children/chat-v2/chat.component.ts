@@ -9,44 +9,6 @@ import { User } from 'src/app/models/user';
 })
 export class ChatComponent implements OnInit {
 
-  currentUser = {
-    name: `Mimmo`,
-    surname: `D'Oria`,
-    role: `Operatore`
-  } as User;
-
-  messageList: Message[] = [
-    {
-      id: 1,
-      content: `Ciao sono il messaggio dell'operatore`,
-      date: Date.now(),
-      user: {
-        name: `Mimmo`,
-        surname: `D'Oria`,
-        role: `Operatore`
-      }
-    },
-    {
-      id: 2,
-      content: `Ciao sono il messaggio dell'manager`,
-      date: Date.now() + 1000000,
-      user: {
-        name: `Alessandro`,
-        surname: `Manica`,
-        role: `Manager`
-      }
-    },
-    {
-      id: 3,
-      content: `Ho un problema con la macchina 1`,
-      date: Date.now() + 2000000,
-      user: {
-        name: `Mimmo`,
-        surname: `D'Oria`,
-        role: `Operatore`
-      }
-    }
-  ]
 
   constructor() { }
 

@@ -58,7 +58,7 @@ export class ChatMessageComponent implements OnInit {
 
     this.ws.observeMessage.subscribe((msg: any) => {
       if (msg !== undefined) {
-
+        this.messageList.push(msg);
         setTimeout(() => { this.bodyCard.scrollTop = this.bodyCard.scrollHeight; }, 100);
       }
     });
@@ -78,7 +78,7 @@ export class ChatMessageComponent implements OnInit {
     tempMessage.date = Date.now();
 
     this.ws.sendMessage(tempMessage, tempMessage.chat.id);
-    this.messageList.push(tempMessage);
+
     setTimeout(() => { this.bodyCard.scrollTop = this.bodyCard.scrollHeight; }, 100);
 
     console.log(form.content);
