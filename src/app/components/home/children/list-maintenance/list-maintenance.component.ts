@@ -6,6 +6,8 @@ import { UserService } from '../../../../services/user.service';
 import { Router } from '@angular/router';
 import { UserMaintenanceService } from '../../../../services/user-maintenance.service';
 import { UserMaintenance } from '../../../../models/user-maintenance';
+import {Chat} from '../../../../models/chat';
+import {ChatService} from '../../../../services/chat.service';
 
 @Component({
   selector: 'app-list-maintenance',
@@ -21,6 +23,7 @@ export class ListMaintenanceComponent implements OnInit {
   constructor(
     private maintenanceService: MaintenanceService,
     private userMaintenanceService: UserMaintenanceService,
+    private chatService: ChatService,
     private userService: UserService,
     private router: Router) { }
 
@@ -76,6 +79,16 @@ export class ListMaintenanceComponent implements OnInit {
       date: date.toISOString(),
       status: 'forwarded',
     };
+    const chat = {
+      id: Number(maintenance),
+      maintenance: {
+        id: Number(maintenance)
+      }
+    } as Chat;
+    console.log(chat);
+    this.chatService.saveChat(chat).subscribe(data2 => {
+      console.log(data2);
+    });
     console.log(this.userMaintenance);
     this.userMaintenanceService.saveUM(this.userMaintenance).subscribe(data => {
       console.log(data);

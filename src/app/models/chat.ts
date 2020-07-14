@@ -1,8 +1,10 @@
 import { Message } from './message';
+import {Maintenance} from './maintenance';
 
 export interface Chat {
     id: number;
     message?: Message[];
-    maintenance: string;
+    maintenance: Maintenance;
+    maintenanceName: string;
     newMessage?: boolean;
 }

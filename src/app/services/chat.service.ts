@@ -43,6 +43,12 @@ export class ChatService {
     );
   }
 
+  saveChat(chat: Chat): Observable<Chat> {
+    return this.http.post<Chat>(this.saveChatUrl, chat, httpOptions).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   sendMessage(message: Message) {
     return this.http.post<Message>(this.sendMessageUrl, message, httpOptions).pipe(
       catchError(this.handleError)

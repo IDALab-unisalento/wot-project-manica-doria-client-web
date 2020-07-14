@@ -13,6 +13,8 @@ import { AttachmentService } from '../../../../services/attachment.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as moment from 'moment';
 import {split} from 'ts-node';
+import {ChatService} from '../../../../services/chat.service';
+import {Chat} from '../../../../models/chat';
 
 @Component({
   selector: 'app-maintenance',
@@ -54,6 +56,7 @@ export class MaintenanceComponent implements OnInit {
     private zoneService: ZoneService,
     private maintenanceService: MaintenanceService,
     private attachmentService: AttachmentService,
+    private chatService: ChatService,
     private sanitizer: DomSanitizer,
     private router: Router) { }
 

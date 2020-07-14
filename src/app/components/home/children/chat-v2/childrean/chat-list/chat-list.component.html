@@ -3,14 +3,14 @@
         List User's
     </div>
     <div class="card-body">
-        <div type="button" class="item-chat" *ngFor="let chat of chats" (click)="goTo(chat.id, chat.maintenance)">
+        <div type="button" class="item-chat" *ngFor="let chat of chats" (click)="goTo(chat.id, chat.maintenanceName)">
             <div class="row">
                 <div class="col-2 pdb10">
                     <i class="fa fa-user-circle fa-3x"></i>
                 </div>
                 <div class="col-8 pdb10">
                     <div class="h6" style="margin-bottom: 0;">
-                        {{chat.maintenance}}
+                        {{chat.maintenanceName}}
                     </div>
                 </div>
                 <div class="col-2">

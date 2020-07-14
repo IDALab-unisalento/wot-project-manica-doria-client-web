@@ -40,22 +40,23 @@ export class ChatListComponent implements OnInit {
 
         this.chats.forEach(chat => {
           this.maintenaceService.getMaintenanceById(chat.id)
-            .subscribe(maintenace => {
-              chat.maintenance = maintenace.name;
+            .subscribe(maintenance => {
+              chat.maintenanceName = maintenance.name;
+              console.log(chat);
             });
         });
       }
     );
 
     this.ws.observeMessage.subscribe((msg: Message) => {
-      console.log(msg)
+      console.log(msg);
       this.chats.forEach(chat => {
         console.log('corresponde', {
           msg: msg.chat.id,
           chat: chat.id
-        })
+        });
         // solo due uguali altrimenti non funziona
-        if (msg.chat.id == chat.id) {
+        if (msg.chat.id === chat.id) {
           console.log('trovato')
           chat.newMessage = true;
         }
