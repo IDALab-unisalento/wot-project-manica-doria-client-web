@@ -77,6 +77,8 @@ export class ChatMessageComponent implements OnInit {
     tempMessage.content = form.content;
     tempMessage.date = Date.now();
 
+    console.log(tempMessage);
+
     this.ws.sendMessage(tempMessage, tempMessage.chat.id);
 
     setTimeout(() => { this.bodyCard.scrollTop = this.bodyCard.scrollHeight; }, 100);

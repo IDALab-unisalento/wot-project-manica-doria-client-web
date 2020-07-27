@@ -7,3 +7,7 @@
     color: whitesmoke;
     border-radius: 5rem;
 }
+
+.mt-10 {
+  margin: 10px 0;
+}

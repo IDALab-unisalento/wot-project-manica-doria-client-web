@@ -28,7 +28,7 @@ export class OperatorComponent implements OnInit {
   }
 
   getAllUser() {
-    this.userService.getAllUser().subscribe(data => {
+    this.userService.getAllUserByRole('operator').subscribe(data => {
       console.log(data);
       this.userList = data;
     });

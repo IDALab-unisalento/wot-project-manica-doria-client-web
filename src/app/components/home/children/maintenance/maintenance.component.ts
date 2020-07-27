@@ -177,7 +177,6 @@ export class MaintenanceComponent implements OnInit {
 
   // salviamo le foto prese dal pc nell'array degli attachment per poi poterle salvare nel db
   onFileSelected(event) {
-    //console.log('Event: ', event);
     this.attachmentList = [];
     this.printImageSelected(event.target.files);
     for (let i = 0; i < event.target.files.length; i++) {
@@ -186,10 +185,6 @@ export class MaintenanceComponent implements OnInit {
       reader.onloadend = () => {
         const base64 = reader.result;
         console.log(base64);
-        /*if (typeof base64 === 'string') {
-          this.sanitizedImageData = (this.sanitizer.bypassSecurityTrustUrl(base64));
-        }*/
-        //console.log('BS', this.sanitizedImageData);
         this.attachment = {
           file: event.target.files[i],
           encodedFile: base64.toString(),

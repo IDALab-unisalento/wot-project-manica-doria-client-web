@@ -22,11 +22,18 @@ export class UserService {
   private saveUserUrl = ApiVariables.apiUrlUser + '/save';
   private deleteUserUrl = ApiVariables.apiUrlUser + '/delete/';
   private updateUserUrl = ApiVariables.apiUrlUser + '/update';
+  private getAllByRoleUserUrl = ApiVariables.apiUrlUser + /getAllByRole/;
 
   constructor(private http: HttpClient) { }
 
   getAllUser(): Observable<User[]> {
     return this.http.get<User[]>(this.getAllUserUrl).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllUserByRole(role: string): Observable<User[]> {
+    return this.http.get<User[]>(this.getAllByRoleUserUrl + role).pipe(
       catchError(this.handleError)
     );
   }

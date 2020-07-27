@@ -7,8 +7,8 @@
             <i style=" font-size: 200px;" class="align-middle fa fa-5x fa-user-circle"></i>
         </div>
         <div class="row d-flex justify-content-center align-items-center">
-            <div class="title">
-                <h3 style="text-transform: capitalize;"> Mario Rossi </h3>
+            <div class="title text-center">
+                <h3 style="text-transform: capitalize;"> {{user.name}} {{user.surname}} </h3>
                 <h5 style="color: #a0a0a0;"> Administrator </h5>
             </div>
         </div>
@@ -17,16 +17,14 @@
             <div class="col-2 info" style="margin-left: 50px; margin-bottom: 20px; border-left: 8px #379392 solid;">
                 <p>Name: </p>
                 <p>Surname: </p>
-                <p>BirthDay: </p>
                 <p>Serial Number: </p>
                 <p>Role: </p>
             </div>
             <div class="col-3 info">
-                <p>Mario</p>
-                <p>Rossi</p>
-                <p> 10 Gen 1987 </p>
-                <p> 20022993 </p>
-                <p>Administrator </p>
+                <p>{{user.name}}</p>
+                <p>{{user.surname}}</p>
+                <p>{{user.serialNumber}}</p>
+                <p>Administrator</p>
             </div>
             <div class="col-6">
                 <form #changePasswordForm="ngForm" (ngSubmit)='changePassword(changePasswordForm.value)'>
